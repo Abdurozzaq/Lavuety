@@ -11,6 +11,15 @@ import VueAxios from 'vue-axios'
 import VueRouter from 'vue-router';
 import { routes } from './Routes';
 
+// For AXIOS DEFAULT HEADERS
+axios.defaults.withCredentials = true
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.baseURL = 'http://localhost:8000';
+
+const token = localStorage.getItem('userToken')
+if (token) {
+  axios.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token
+}
 
 Vue.use(VueRouter);
 const router = new VueRouter({

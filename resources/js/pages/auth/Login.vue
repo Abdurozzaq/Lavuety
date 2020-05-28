@@ -23,12 +23,24 @@
                 <v-toolbar-title>Login form</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-alert
+                  v-model="errorAlert"
+                  border="top"
+                  color="red lighten-2"
+                  dark
+                  dismissible
+                >
+                  <ul v-for="(error, index) in serverError" v-bind:key="index">
+                    <li>{{ error[0] }}</li>
+                  </ul>
+                </v-alert>
+                <v-form v-on:submit.prevent="login">
                   <v-text-field
                     label="Email"
                     name="email"
                     prepend-icon="person"
                     type="text"
+                    v-model="email"
                   ></v-text-field>
 
                   <v-text-field
@@ -37,9 +49,10 @@
                     name="password"
                     prepend-icon="lock"
                     type="password"
+                    v-model="password"
                   ></v-text-field>
 
-                  <v-btn color="primary">Login</v-btn>
+                  <v-btn type="submit" color="primary">Login</v-btn>
                 </v-form>
               </v-card-text>
               <v-toolbar
@@ -54,14 +67,72 @@
           </v-col>
         </v-row>
       </v-container>
+
+      <v-snackbar
+        v-model="successSnackbar"
+        :timeout="3000"
+        color="success"
+      >
+        You've logged in successfully.
+        <v-btn
+          color="white"
+          text
+          @click="successSnackbar = false"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
+
     </v-content>
   </v-app>
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     props: {
       source: String,
     },
+
+    data() {
+      return {
+        email: null,
+        password: null,
+        serverError: null,
+        errorAlert: false,
+        successSnackbar: false,
+      }
+    },
+
+    methods: {
+      login: function() {
+        let currentObj = this
+        axios.get('/sanctum/csrf-cookie').then(response => {
+          axios.post('/api/login', {
+            email: currentObj.email,
+            password: currentObj.password
+          })
+          .then(function (response) {
+            const token = response.data.token
+            console.log(token)
+            // add bearer token to localstorage
+            localStorage.setItem('userToken', token)
+
+            // after success show successSnackbar
+            currentObj.successSnackbar = true
+            // after all success redirect to home
+            currentObj.$router.push('/home')
+
+          })
+          .catch(function (error) {
+            localStorage.removeItem('userToken')
+            if(error.response) {
+              currentObj.serverError = error.response.data.errors
+              currentObj.errorAlert = true
+            }
+          })
+        })
+      } // end of login method
+    } // end of methods
   }
 </script>

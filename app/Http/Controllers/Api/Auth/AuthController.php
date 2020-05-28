@@ -65,13 +65,12 @@ class AuthController extends Controller
                     'status' => 'Success',
                     //LALU PADA METHOD createToken(), TAMBAHKAN PARAMETER ABILITIESNYA
                     'token' => $user->createToken($user->roles->pluck('name'), $abilities)->plainTextToken,
-                    'role' =>  $user->roles->pluck('name'),
                 ], 200);
             } else {
                 return response()->json([
                     'status' => 'Failed',
-                    'errors'=> ['email' => ['Please Verify Email'] ],1
-                ], 500);
+                    'errors'=> ['email' => ['Please Verify Email'] ],
+                ], 401);
             }
 
 
@@ -94,7 +93,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'failed',
                 'errors' => $validator->errors()
-            ], 500);
+            ], 401);
         } else {
             $user = User::create([
                 'first_name' => $request->first_name,
