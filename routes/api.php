@@ -22,6 +22,8 @@ Route::post('email/resend', 'Api\Auth\VerificationApiController@resendVerificati
 Route::post('password/forgot', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail')->name('api.forgot-password');
 Route::post('password/reset', 'Api\Auth\ResetPasswordController@reset')->name('api.reset-password');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    // For User Profile
+    Route::get('get-user', 'Api\Auth\AuthController@getUser');
+
 });

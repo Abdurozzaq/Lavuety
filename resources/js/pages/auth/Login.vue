@@ -54,6 +54,18 @@
 
                   <v-btn type="submit" color="primary">Login</v-btn>
                 </v-form>
+
+                <v-overlay
+                  :absolute="true"
+                  :value="overlay"
+                >
+                  <v-progress-circular
+                    :size="50"
+                    color="white"
+                    indeterminate
+                  ></v-progress-circular>
+                </v-overlay>
+
               </v-card-text>
               <v-toolbar
                 color="primary"
@@ -62,6 +74,15 @@
               >
                 <v-btn href="/register" outlined class="mr-2" color="white">Register</v-btn>
                 <v-btn href="/forgot-password" outlined class="mr-2" color="white">Forgot Password?</v-btn>
+               
+              </v-toolbar>
+              <v-toolbar
+                color="primary"
+                dark
+                flat
+               
+              >
+                <v-btn href="/resend-verification-mail" outlined class="mr-2" color="white">Resend Verification Mail?</v-btn>
               </v-toolbar>
             </v-card>
           </v-col>
@@ -70,7 +91,7 @@
 
       <v-snackbar
         v-model="successSnackbar"
-        :timeout="3000"
+        :timeout="5000"
         color="success"
       >
         You've logged in successfully.
@@ -101,12 +122,14 @@
         serverError: null,
         errorAlert: false,
         successSnackbar: false,
+        overlay: false,
       }
     },
 
     methods: {
       login: function() {
         let currentObj = this
+        currentObj.overlay = true
         axios.get('/sanctum/csrf-cookie').then(response => {
           axios.post('/api/login', {
             email: currentObj.email,
@@ -120,12 +143,17 @@
 
             // after success show successSnackbar
             currentObj.successSnackbar = true
+
+            currentObj.overlay = false
+
             // after all success redirect to home
             currentObj.$router.push('/home')
+
 
           })
           .catch(function (error) {
             localStorage.removeItem('userToken')
+            currentObj.overlay = false
             if(error.response) {
               currentObj.serverError = error.response.data.errors
               currentObj.errorAlert = true

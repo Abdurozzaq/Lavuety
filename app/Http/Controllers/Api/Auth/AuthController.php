@@ -36,6 +36,15 @@ class AuthController extends Controller
         ], 200);
     }
 
+    public function getUser(){
+        return response()->json([
+            'status' => 'Success',
+            //LALU PADA METHOD createToken(), TAMBAHKAN PARAMETER ABILITIESNYA
+            'user' => Auth::user(),
+            'role' =>Auth::user()->roles->pluck('name')
+        ], 200);
+    }
+
     public function login(Request $request)
     {
         $this->validate($request, [

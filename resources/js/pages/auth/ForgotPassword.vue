@@ -42,6 +42,13 @@
                 <v-btn href="/register" outlined class="mr-2" color="white">Register</v-btn>
                 <v-btn href="/login" outlined class="mr-2" color="white">Login</v-btn>
               </v-toolbar>
+              <v-toolbar
+                color="warning"
+                dark
+                flat
+              >
+                <v-btn href="/resend-verification-mail" outlined class="mr-2" color="white">Resend Verification Mail?</v-btn>
+              </v-toolbar>
             </v-card>
           </v-col>
         </v-row>

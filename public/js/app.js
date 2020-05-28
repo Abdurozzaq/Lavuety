@@ -2511,6 +2511,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
@@ -2619,6 +2626,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2630,12 +2658,14 @@ __webpack_require__.r(__webpack_exports__);
       password: null,
       serverError: null,
       errorAlert: false,
-      successSnackbar: false
+      successSnackbar: false,
+      overlay: false
     };
   },
   methods: {
     login: function login() {
       var currentObj = this;
+      currentObj.overlay = true;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', {
           email: currentObj.email,
@@ -2646,11 +2676,13 @@ __webpack_require__.r(__webpack_exports__);
 
           localStorage.setItem('userToken', token); // after success show successSnackbar
 
-          currentObj.successSnackbar = true; // after all success redirect to home
+          currentObj.successSnackbar = true;
+          currentObj.overlay = false; // after all success redirect to home
 
           currentObj.$router.push('/home');
         })["catch"](function (error) {
           localStorage.removeItem('userToken');
+          currentObj.overlay = false;
 
           if (error.response) {
             currentObj.serverError = error.response.data.errors;
@@ -2666,6 +2698,81 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    source: String
+  },
+  methods: {
+    redirect: function redirect() {
+      var currentObj = this;
+      currentObj.$router.push('/login');
+    }
+  },
+  // end of methods
+  mounted: function mounted() {
+    var currentObj = this;
+    currentObj.redirect();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/auth/Register.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/auth/Register.vue?vue&type=script&lang=js& ***!
@@ -2675,6 +2782,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2757,9 +2866,110 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
+  },
+  data: function data() {
+    return {
+      first_name: null,
+      last_name: null,
+      email: null,
+      password: null,
+      password_confirmation: null,
+      serverError: null,
+      errorAlert: false,
+      successSnackbar: false,
+      overlay: false
+    };
+  },
+  methods: {
+    register: function register() {
+      var currentObj = this;
+      currentObj.overlay = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', {
+          first_name: currentObj.first_name,
+          last_name: currentObj.last_name,
+          email: currentObj.email,
+          password: currentObj.password,
+          password_confirmation: currentObj.password_confirmation
+        }).then(function (response) {
+          var token = response.data.token;
+          console.log(token); // add bearer token to localstorage
+
+          localStorage.setItem('userToken', token); // after success show successSnackbar
+
+          currentObj.successSnackbar = true;
+          currentObj.overlay = false; // after all success redirect to home
+
+          currentObj.$router.push('/home');
+        })["catch"](function (error) {
+          localStorage.removeItem('userToken');
+          currentObj.overlay = false;
+
+          if (error.response) {
+            currentObj.serverError = error.response.data.errors;
+            currentObj.errorAlert = true;
+          }
+        });
+      });
+    } // end of login method
+
   }
 });
 
@@ -2774,6 +2984,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2826,10 +3038,93 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
-  }
+  },
+  data: function data() {
+    return {
+      email: null,
+      serverError: null,
+      errorAlert: false,
+      successSnackbar: false,
+      overlay: false
+    };
+  },
+  methods: {
+    resend: function resend() {
+      var currentObj = this;
+      currentObj.overlay = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/email/resend', {
+          email: currentObj.email
+        }).then(function (response) {
+          // after success show successSnackbar
+          currentObj.successSnackbar = true;
+          currentObj.overlay = false;
+        })["catch"](function (error) {
+          currentObj.overlay = false;
+
+          if (error.response) {
+            currentObj.serverError = error.response.data.errors;
+            currentObj.errorAlert = true;
+          }
+        });
+      });
+    } // end of login method
+
+  } // end of methods
+
 });
 
 /***/ }),
@@ -5038,6 +5333,26 @@ var render = function() {
                               )
                             ],
                             1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-toolbar",
+                            { attrs: { color: "warning", dark: "", flat: "" } },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "mr-2",
+                                  attrs: {
+                                    href: "/resend-verification-mail",
+                                    outlined: "",
+                                    color: "white"
+                                  }
+                                },
+                                [_vm._v("Resend Verification Mail?")]
+                              )
+                            ],
+                            1
                           )
                         ],
                         1
@@ -5194,6 +5509,23 @@ var render = function() {
                                   )
                                 ],
                                 1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-overlay",
+                                {
+                                  attrs: { absolute: true, value: _vm.overlay }
+                                },
+                                [
+                                  _c("v-progress-circular", {
+                                    attrs: {
+                                      size: 50,
+                                      color: "white",
+                                      indeterminate: ""
+                                    }
+                                  })
+                                ],
+                                1
                               )
                             ],
                             1
@@ -5230,6 +5562,26 @@ var render = function() {
                               )
                             ],
                             1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-toolbar",
+                            { attrs: { color: "primary", dark: "", flat: "" } },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "mr-2",
+                                  attrs: {
+                                    href: "/resend-verification-mail",
+                                    outlined: "",
+                                    color: "white"
+                                  }
+                                },
+                                [_vm._v("Resend Verification Mail?")]
+                              )
+                            ],
+                            1
                           )
                         ],
                         1
@@ -5247,7 +5599,7 @@ var render = function() {
           _c(
             "v-snackbar",
             {
-              attrs: { timeout: 3000, color: "success" },
+              attrs: { timeout: 5000, color: "success" },
               model: {
                 value: _vm.successSnackbar,
                 callback: function($$v) {
@@ -5269,6 +5621,104 @@ var render = function() {
                   }
                 },
                 [_vm._v("\n        Close\n      ")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=template&id=77d1dc5b&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=template&id=77d1dc5b& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-app",
+    { attrs: { id: "inspire" } },
+    [
+      _c(
+        "v-content",
+        [
+          _c(
+            "v-container",
+            { staticClass: "fill-height", attrs: { fluid: "" } },
+            [
+              _c(
+                "v-row",
+                { attrs: { align: "center", justify: "center" } },
+                [
+                  _c(
+                    "v-col",
+                    { attrs: { cols: "12", sm: "8", md: "4" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "mx-auto",
+                          attrs: {
+                            color: "success",
+                            dark: "",
+                            "max-width": "400"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-card-title",
+                            [
+                              _c("v-icon", { attrs: { large: "", left: "" } }, [
+                                _vm._v(
+                                  "\n                  mdi-account-check\n              "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                { staticClass: "title font-weight-light" },
+                                [_vm._v("Verification Success")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-card-text",
+                            { staticClass: "headline font-weight-bold" },
+                            [
+                              _vm._v(
+                                "\n              Now, Redirecting to your dashboard...\n              "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             1
@@ -5336,7 +5786,40 @@ var render = function() {
                             "v-card-text",
                             [
                               _c(
+                                "v-alert",
+                                {
+                                  attrs: {
+                                    border: "top",
+                                    color: "red lighten-2",
+                                    dark: "",
+                                    dismissible: ""
+                                  },
+                                  model: {
+                                    value: _vm.errorAlert,
+                                    callback: function($$v) {
+                                      _vm.errorAlert = $$v
+                                    },
+                                    expression: "errorAlert"
+                                  }
+                                },
+                                _vm._l(_vm.serverError, function(error, index) {
+                                  return _c("ul", { key: index }, [
+                                    _c("li", [_vm._v(_vm._s(error[0]))])
+                                  ])
+                                }),
+                                0
+                              ),
+                              _vm._v(" "),
+                              _c(
                                 "v-form",
+                                {
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.register($event)
+                                    }
+                                  }
+                                },
                                 [
                                   _c("v-text-field", {
                                     attrs: {
@@ -5344,6 +5827,13 @@ var render = function() {
                                       name: "first_name",
                                       "prepend-icon": "person",
                                       type: "text"
+                                    },
+                                    model: {
+                                      value: _vm.first_name,
+                                      callback: function($$v) {
+                                        _vm.first_name = $$v
+                                      },
+                                      expression: "first_name"
                                     }
                                   }),
                                   _vm._v(" "),
@@ -5353,6 +5843,13 @@ var render = function() {
                                       name: "last_name",
                                       "prepend-icon": "person",
                                       type: "text"
+                                    },
+                                    model: {
+                                      value: _vm.last_name,
+                                      callback: function($$v) {
+                                        _vm.last_name = $$v
+                                      },
+                                      expression: "last_name"
                                     }
                                   }),
                                   _vm._v(" "),
@@ -5362,6 +5859,13 @@ var render = function() {
                                       name: "email",
                                       "prepend-icon": "mail",
                                       type: "text"
+                                    },
+                                    model: {
+                                      value: _vm.email,
+                                      callback: function($$v) {
+                                        _vm.email = $$v
+                                      },
+                                      expression: "email"
                                     }
                                   }),
                                   _vm._v(" "),
@@ -5372,6 +5876,13 @@ var render = function() {
                                       name: "password",
                                       "prepend-icon": "lock",
                                       type: "password"
+                                    },
+                                    model: {
+                                      value: _vm.password,
+                                      callback: function($$v) {
+                                        _vm.password = $$v
+                                      },
+                                      expression: "password"
                                     }
                                   }),
                                   _vm._v(" "),
@@ -5382,12 +5893,43 @@ var render = function() {
                                       name: "password-confirmation",
                                       "prepend-icon": "lock",
                                       type: "password"
+                                    },
+                                    model: {
+                                      value: _vm.password_confirmation,
+                                      callback: function($$v) {
+                                        _vm.password_confirmation = $$v
+                                      },
+                                      expression: "password_confirmation"
                                     }
                                   }),
                                   _vm._v(" "),
-                                  _c("v-btn", { attrs: { color: "success" } }, [
-                                    _vm._v("Register")
-                                  ])
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        type: "submit",
+                                        color: "success"
+                                      }
+                                    },
+                                    [_vm._v("Register")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-overlay",
+                                {
+                                  attrs: { absolute: true, value: _vm.overlay }
+                                },
+                                [
+                                  _c("v-progress-circular", {
+                                    attrs: {
+                                      size: 50,
+                                      color: "white",
+                                      indeterminate: ""
+                                    }
+                                  })
                                 ],
                                 1
                               )
@@ -5426,6 +5968,26 @@ var render = function() {
                               )
                             ],
                             1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-toolbar",
+                            { attrs: { color: "success", dark: "", flat: "" } },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "mr-2",
+                                  attrs: {
+                                    href: "/resend-verification-mail",
+                                    outlined: "",
+                                    color: "white"
+                                  }
+                                },
+                                [_vm._v("Resend Verification Mail?")]
+                              )
+                            ],
+                            1
                           )
                         ],
                         1
@@ -5435,6 +5997,38 @@ var render = function() {
                   )
                 ],
                 1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-snackbar",
+            {
+              attrs: { timeout: 3000, color: "success" },
+              model: {
+                value: _vm.successSnackbar,
+                callback: function($$v) {
+                  _vm.successSnackbar = $$v
+                },
+                expression: "successSnackbar"
+              }
+            },
+            [
+              _vm._v(
+                "\n      You've registered and logged in successfully.\n      "
+              ),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "white", text: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.successSnackbar = false
+                    }
+                  }
+                },
+                [_vm._v("\n        Close\n      ")]
               )
             ],
             1
@@ -5506,7 +6100,40 @@ var render = function() {
                             "v-card-text",
                             [
                               _c(
+                                "v-alert",
+                                {
+                                  attrs: {
+                                    border: "top",
+                                    color: "red lighten-2",
+                                    dark: "",
+                                    dismissible: ""
+                                  },
+                                  model: {
+                                    value: _vm.errorAlert,
+                                    callback: function($$v) {
+                                      _vm.errorAlert = $$v
+                                    },
+                                    expression: "errorAlert"
+                                  }
+                                },
+                                _vm._l(_vm.serverError, function(error, index) {
+                                  return _c("ul", { key: index }, [
+                                    _c("li", [_vm._v(_vm._s(error[0]))])
+                                  ])
+                                }),
+                                0
+                              ),
+                              _vm._v(" "),
+                              _c(
                                 "v-form",
+                                {
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.resend($event)
+                                    }
+                                  }
+                                },
                                 [
                                   _c("v-text-field", {
                                     attrs: {
@@ -5514,12 +6141,43 @@ var render = function() {
                                       name: "email",
                                       "prepend-icon": "person",
                                       type: "text"
+                                    },
+                                    model: {
+                                      value: _vm.email,
+                                      callback: function($$v) {
+                                        _vm.email = $$v
+                                      },
+                                      expression: "email"
                                     }
                                   }),
                                   _vm._v(" "),
-                                  _c("v-btn", { attrs: { color: "primary" } }, [
-                                    _vm._v("Resend")
-                                  ])
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        type: "submit",
+                                        color: "primary"
+                                      }
+                                    },
+                                    [_vm._v("Resend")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-overlay",
+                                {
+                                  attrs: { absolute: true, value: _vm.overlay }
+                                },
+                                [
+                                  _c("v-progress-circular", {
+                                    attrs: {
+                                      size: 50,
+                                      color: "white",
+                                      indeterminate: ""
+                                    }
+                                  })
                                 ],
                                 1
                               )
@@ -5558,12 +6216,62 @@ var render = function() {
                               )
                             ],
                             1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-toolbar",
+                            { attrs: { color: "primary", dark: "", flat: "" } },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "mr-2",
+                                  attrs: {
+                                    href: "/forgot-password",
+                                    outlined: "",
+                                    color: "white"
+                                  }
+                                },
+                                [_vm._v("Forgot Password?")]
+                              )
+                            ],
+                            1
                           )
                         ],
                         1
                       )
                     ],
                     1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-snackbar",
+                {
+                  attrs: { timeout: 5000, color: "success" },
+                  model: {
+                    value: _vm.successSnackbar,
+                    callback: function($$v) {
+                      _vm.successSnackbar = $$v
+                    },
+                    expression: "successSnackbar"
+                  }
+                },
+                [
+                  _vm._v("\n        Verification Email Sent.\n        "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "white", text: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.successSnackbar = false
+                        }
+                      }
+                    },
+                    [_vm._v("\n          Close\n        ")]
                   )
                 ],
                 1
@@ -5846,6 +6554,18 @@ function normalizeComponent (
   }
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/vue-router-multiguard/dist/vue-router-multiguard.min.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/vue-router-multiguard/dist/vue-router-multiguard.min.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(t,r){ true?module.exports=r():undefined}(this,function(){return function(t){function r(n){if(e[n])return e[n].exports;var o=e[n]={i:n,l:!1,exports:{}};return t[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}var e={};return r.m=t,r.c=e,r.d=function(t,e,n){r.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:n})},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,r){return Object.prototype.hasOwnProperty.call(t,r)},r.p="/dist/",r(r.s=0)}([function(t,r,e){"use strict";function n(t){return void 0===t}function o(t,r,e,u){var i=t.slice(0),f=i.shift();if(n(f))return void u();f(r,e,function(t){if(n(t))return void o(i,r,e,u);u(t)})}t.exports=function(t){if(!Array.isArray(t))throw new Error("You must specify an array of guards");return function(r,e,n){return o(t,r,e,n)}}}])});
+//# sourceMappingURL=vue-router-multiguard.min.js.map
 
 /***/ }),
 
@@ -62682,14 +63402,21 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
-/* harmony import */ var _layouts_Dashboard_User_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/Dashboard-User.vue */ "./resources/js/layouts/Dashboard-User.vue");
-/* harmony import */ var _layouts_Dashboard_Admin_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/Dashboard-Admin.vue */ "./resources/js/layouts/Dashboard-Admin.vue");
-/* harmony import */ var _pages_auth_Login_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/auth/Login.vue */ "./resources/js/pages/auth/Login.vue");
-/* harmony import */ var _pages_auth_Register_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/auth/Register.vue */ "./resources/js/pages/auth/Register.vue");
-/* harmony import */ var _pages_auth_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/auth/ForgotPassword.vue */ "./resources/js/pages/auth/ForgotPassword.vue");
-/* harmony import */ var _pages_auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/auth/ResetPassword.vue */ "./resources/js/pages/auth/ResetPassword.vue");
-/* harmony import */ var _pages_auth_ResendVerificationMail_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/auth/ResendVerificationMail.vue */ "./resources/js/pages/auth/ResendVerificationMail.vue");
-/* harmony import */ var _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue");
+/* harmony import */ var vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router-multiguard */ "./node_modules/vue-router-multiguard/dist/vue-router-multiguard.min.js");
+/* harmony import */ var vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _layouts_Dashboard_User_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layouts/Dashboard-User.vue */ "./resources/js/layouts/Dashboard-User.vue");
+/* harmony import */ var _layouts_Dashboard_Admin_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layouts/Dashboard-Admin.vue */ "./resources/js/layouts/Dashboard-Admin.vue");
+/* harmony import */ var _pages_auth_Login_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/auth/Login.vue */ "./resources/js/pages/auth/Login.vue");
+/* harmony import */ var _pages_auth_Register_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/auth/Register.vue */ "./resources/js/pages/auth/Register.vue");
+/* harmony import */ var _pages_auth_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/auth/ForgotPassword.vue */ "./resources/js/pages/auth/ForgotPassword.vue");
+/* harmony import */ var _pages_auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/auth/ResetPassword.vue */ "./resources/js/pages/auth/ResetPassword.vue");
+/* harmony import */ var _pages_auth_ResendVerificationMail_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/auth/ResendVerificationMail.vue */ "./resources/js/pages/auth/ResendVerificationMail.vue");
+/* harmony import */ var _pages_auth_RedirectAfterVerify_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/auth/RedirectAfterVerify.vue */ "./resources/js/pages/auth/RedirectAfterVerify.vue");
+/* harmony import */ var _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue");
+
+
 
  // For Auth
 
@@ -62699,19 +63426,102 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+/**
+ *
+ * For Authenticated
+ * And Not Authenticated
+ *
+ * Guard
+ */
+
+var ifAuthenticated = function ifAuthenticated(to, from, next) {
+  if (localStorage.getItem('userToken')) {
+    next();
+    return;
+  } else {
+    next('/login');
+  }
+};
+
+var ifNotAuthenticated = function ifNotAuthenticated(to, from, next) {
+  if (!localStorage.getItem('userToken')) {
+    next();
+  } else {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/get-user').then(function (response) {
+        // handle success
+        var userRole = response.data.role;
+
+        if (userRole == "admin") {
+          next('/siAdmino');
+          return;
+        } else {
+          next('/home');
+        }
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    });
+  }
+};
+
+var adminOnly = function adminOnly(to, from, next) {
+  axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/get-user').then(function (response) {
+      // handle success
+      var userRole = response.data.role;
+
+      if (userRole == "admin") {
+        next();
+        return;
+      } else {
+        next('/login');
+        return;
+      }
+    })["catch"](function (error) {
+      // handle error
+      console.log(error);
+    });
+  });
+};
+
+var userOnly = function userOnly(to, from, next) {
+  axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/get-user').then(function (response) {
+      // handle success
+      var userRole = response.data.role;
+
+      if (userRole == "user") {
+        next();
+        return;
+      } else {
+        next('/login');
+        return;
+      }
+    })["catch"](function (error) {
+      // handle error
+      console.log(error);
+    });
+  });
+};
+
 var routes = [{
   path: "/home",
-  component: _layouts_Dashboard_User_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  component: _layouts_Dashboard_User_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   children: [{
     path: "",
-    component: _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    beforeEnter: vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default()([ifAuthenticated, userOnly])
   }]
 }, {
   path: "/siAdmino",
-  component: _layouts_Dashboard_Admin_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+  component: _layouts_Dashboard_Admin_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   children: [{
     path: "",
-    component: _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    beforeEnter: vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default()([ifNotAuthenticated, adminOnly])
   }]
 },
 /**
@@ -62719,19 +63529,28 @@ var routes = [{
  */
 {
   path: "/login",
-  component: _pages_auth_Login_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _pages_auth_Login_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+  beforeEnter: vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default()([ifNotAuthenticated])
 }, {
   path: "/register",
-  component: _pages_auth_Register_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _pages_auth_Register_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  beforeEnter: vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default()([ifNotAuthenticated])
 }, {
   path: "/forgot-password",
-  component: _pages_auth_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  component: _pages_auth_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+  beforeEnter: vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default()([ifNotAuthenticated])
 }, {
   path: "/reset-password",
-  component: _pages_auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  component: _pages_auth_ResetPassword_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+  beforeEnter: vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default()([ifNotAuthenticated])
 }, {
   path: "/resend-verification-mail",
-  component: _pages_auth_ResendVerificationMail_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+  component: _pages_auth_ResendVerificationMail_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+  beforeEnter: vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default()([ifNotAuthenticated])
+}, {
+  path: "/verification-success",
+  component: _pages_auth_RedirectAfterVerify_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+  beforeEnter: vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default()([ifNotAuthenticated])
 }];
 
 /***/ }),
@@ -62769,6 +63588,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.withCredentials = true;
 axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.headers.common['Content-Type'] = 'application/json';
 axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.baseURL = 'http://localhost:8000';
 var token = localStorage.getItem('userToken');
 
@@ -63133,6 +63953,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_42c42d6a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_42c42d6a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/auth/RedirectAfterVerify.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/pages/auth/RedirectAfterVerify.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _RedirectAfterVerify_vue_vue_type_template_id_77d1dc5b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RedirectAfterVerify.vue?vue&type=template&id=77d1dc5b& */ "./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=template&id=77d1dc5b&");
+/* harmony import */ var _RedirectAfterVerify_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RedirectAfterVerify.vue?vue&type=script&lang=js& */ "./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RedirectAfterVerify_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RedirectAfterVerify_vue_vue_type_template_id_77d1dc5b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _RedirectAfterVerify_vue_vue_type_template_id_77d1dc5b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/auth/RedirectAfterVerify.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RedirectAfterVerify_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./RedirectAfterVerify.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RedirectAfterVerify_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=template&id=77d1dc5b&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=template&id=77d1dc5b& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RedirectAfterVerify_vue_vue_type_template_id_77d1dc5b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./RedirectAfterVerify.vue?vue&type=template&id=77d1dc5b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/auth/RedirectAfterVerify.vue?vue&type=template&id=77d1dc5b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RedirectAfterVerify_vue_vue_type_template_id_77d1dc5b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RedirectAfterVerify_vue_vue_type_template_id_77d1dc5b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
