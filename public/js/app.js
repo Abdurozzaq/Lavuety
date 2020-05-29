@@ -2459,6 +2459,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2518,10 +2520,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
-  }
+  },
+  data: function data() {
+    return {
+      email: null,
+      serverError: null,
+      errorAlert: false,
+      successSnackbar: false,
+      overlay: false
+    };
+  },
+  methods: {
+    forgotPass: function forgotPass() {
+      var currentObj = this;
+      currentObj.errorAlert = false;
+      currentObj.overlay = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/password/forgot', {
+          email: currentObj.email
+        }).then(function (response) {
+          // after success show successSnackbar
+          currentObj.successSnackbar = true;
+          currentObj.overlay = false;
+        })["catch"](function (error) {
+          currentObj.overlay = false;
+
+          if (error.response) {
+            currentObj.serverError = error.response.data.errors;
+            currentObj.errorAlert = true;
+          }
+        });
+      });
+    } // end of forgot password method
+
+  } // end of methods
+
 });
 
 /***/ }),
@@ -2665,6 +2743,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     login: function login() {
       var currentObj = this;
+      currentObj.errorAlert = false;
       currentObj.overlay = true;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', {
@@ -2940,6 +3019,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     register: function register() {
       var currentObj = this;
+      currentObj.errorAlert = false;
       currentObj.overlay = true;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', {
@@ -2949,15 +3029,9 @@ __webpack_require__.r(__webpack_exports__);
           password: currentObj.password,
           password_confirmation: currentObj.password_confirmation
         }).then(function (response) {
-          var token = response.data.token;
-          console.log(token); // add bearer token to localstorage
-
-          localStorage.setItem('userToken', token); // after success show successSnackbar
-
+          // after success show successSnackbar
           currentObj.successSnackbar = true;
-          currentObj.overlay = false; // after all success redirect to home
-
-          currentObj.$router.push('/home');
+          currentObj.overlay = false;
         })["catch"](function (error) {
           localStorage.removeItem('userToken');
           currentObj.overlay = false;
@@ -3104,6 +3178,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     resend: function resend() {
       var currentObj = this;
+      currentObj.errorAlert = false;
       currentObj.overlay = true;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/email/resend', {
@@ -3138,6 +3213,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3207,10 +3284,100 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
-  }
+  },
+  data: function data() {
+    return {
+      email: null,
+      password: null,
+      password_confirmation: null,
+      serverError: null,
+      errorAlert: false,
+      successSnackbar: false,
+      overlay: false
+    };
+  },
+  methods: {
+    resetPass: function resetPass() {
+      var _this = this;
+
+      var currentObj = this;
+      currentObj.errorAlert = false;
+      currentObj.overlay = true;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
+        var token = _this.$route.query.token;
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/password/reset', {
+          email: currentObj.email,
+          password: currentObj.password,
+          password_confirmation: currentObj.password_confirmation,
+          token: token
+        }).then(function (response) {
+          currentObj.email = null;
+          currentObj.password = null;
+          currentObj.password_confirmation = null; // after success show successSnackbar
+
+          currentObj.successSnackbar = true;
+          currentObj.overlay = false;
+        })["catch"](function (error) {
+          currentObj.overlay = false;
+
+          if (error.response) {
+            currentObj.serverError = error.response.data.errors;
+            currentObj.errorAlert = true;
+          }
+        });
+      });
+    } // end of login method
+
+  } // end of methods
+
 });
 
 /***/ }),
@@ -5281,7 +5448,40 @@ var render = function() {
                             "v-card-text",
                             [
                               _c(
+                                "v-alert",
+                                {
+                                  attrs: {
+                                    border: "top",
+                                    color: "red lighten-2",
+                                    dark: "",
+                                    dismissible: ""
+                                  },
+                                  model: {
+                                    value: _vm.errorAlert,
+                                    callback: function($$v) {
+                                      _vm.errorAlert = $$v
+                                    },
+                                    expression: "errorAlert"
+                                  }
+                                },
+                                _vm._l(_vm.serverError, function(error, index) {
+                                  return _c("ul", { key: index }, [
+                                    _c("li", [_vm._v(_vm._s(error[0]))])
+                                  ])
+                                }),
+                                0
+                              ),
+                              _vm._v(" "),
+                              _c(
                                 "v-form",
+                                {
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.forgotPass($event)
+                                    }
+                                  }
+                                },
                                 [
                                   _c("v-text-field", {
                                     attrs: {
@@ -5289,12 +5489,43 @@ var render = function() {
                                       name: "email",
                                       "prepend-icon": "person",
                                       type: "text"
+                                    },
+                                    model: {
+                                      value: _vm.email,
+                                      callback: function($$v) {
+                                        _vm.email = $$v
+                                      },
+                                      expression: "email"
                                     }
                                   }),
                                   _vm._v(" "),
-                                  _c("v-btn", { attrs: { color: "warning" } }, [
-                                    _vm._v("Send Reset Email")
-                                  ])
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        type: "submit",
+                                        color: "warning"
+                                      }
+                                    },
+                                    [_vm._v("Send Reset Email")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-overlay",
+                                {
+                                  attrs: { absolute: true, value: _vm.overlay }
+                                },
+                                [
+                                  _c("v-progress-circular", {
+                                    attrs: {
+                                      size: 50,
+                                      color: "white",
+                                      indeterminate: ""
+                                    }
+                                  })
                                 ],
                                 1
                               )
@@ -5359,6 +5590,38 @@ var render = function() {
                       )
                     ],
                     1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-snackbar",
+                {
+                  attrs: { timeout: 5000, color: "success" },
+                  model: {
+                    value: _vm.successSnackbar,
+                    callback: function($$v) {
+                      _vm.successSnackbar = $$v
+                    },
+                    expression: "successSnackbar"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n      Reset link has been sent successfully.\n      "
+                  ),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "white", text: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.successSnackbar = false
+                        }
+                      }
+                    },
+                    [_vm._v("\n        Close\n      ")]
                   )
                 ],
                 1
@@ -5609,7 +5872,7 @@ var render = function() {
               }
             },
             [
-              _vm._v("\n      You've logged in successfully.\n      "),
+              _vm._v("\n      You has been logged in successfully.\n      "),
               _c(
                 "v-btn",
                 {
@@ -6005,7 +6268,7 @@ var render = function() {
           _c(
             "v-snackbar",
             {
-              attrs: { timeout: 3000, color: "success" },
+              attrs: { timeout: 5000, color: "success" },
               model: {
                 value: _vm.successSnackbar,
                 callback: function($$v) {
@@ -6015,9 +6278,7 @@ var render = function() {
               }
             },
             [
-              _vm._v(
-                "\n      You've registered and logged in successfully.\n      "
-              ),
+              _vm._v("\n      You has been registered successfully.\n      "),
               _c(
                 "v-btn",
                 {
@@ -6346,7 +6607,40 @@ var render = function() {
                             "v-card-text",
                             [
                               _c(
+                                "v-alert",
+                                {
+                                  attrs: {
+                                    border: "top",
+                                    color: "red lighten-2",
+                                    dark: "",
+                                    dismissible: ""
+                                  },
+                                  model: {
+                                    value: _vm.errorAlert,
+                                    callback: function($$v) {
+                                      _vm.errorAlert = $$v
+                                    },
+                                    expression: "errorAlert"
+                                  }
+                                },
+                                _vm._l(_vm.serverError, function(error, index) {
+                                  return _c("ul", { key: index }, [
+                                    _c("li", [_vm._v(_vm._s(error[0]))])
+                                  ])
+                                }),
+                                0
+                              ),
+                              _vm._v(" "),
+                              _c(
                                 "v-form",
+                                {
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.resetPass($event)
+                                    }
+                                  }
+                                },
                                 [
                                   _c("v-text-field", {
                                     attrs: {
@@ -6354,6 +6648,13 @@ var render = function() {
                                       name: "email",
                                       "prepend-icon": "mail",
                                       type: "text"
+                                    },
+                                    model: {
+                                      value: _vm.email,
+                                      callback: function($$v) {
+                                        _vm.email = $$v
+                                      },
+                                      expression: "email"
                                     }
                                   }),
                                   _vm._v(" "),
@@ -6364,6 +6665,13 @@ var render = function() {
                                       name: "password",
                                       "prepend-icon": "lock",
                                       type: "password"
+                                    },
+                                    model: {
+                                      value: _vm.password,
+                                      callback: function($$v) {
+                                        _vm.password = $$v
+                                      },
+                                      expression: "password"
                                     }
                                   }),
                                   _vm._v(" "),
@@ -6374,12 +6682,43 @@ var render = function() {
                                       name: "password-confirmation",
                                       "prepend-icon": "lock",
                                       type: "password"
+                                    },
+                                    model: {
+                                      value: _vm.password_confirmation,
+                                      callback: function($$v) {
+                                        _vm.password_confirmation = $$v
+                                      },
+                                      expression: "password_confirmation"
                                     }
                                   }),
                                   _vm._v(" "),
-                                  _c("v-btn", { attrs: { color: "success" } }, [
-                                    _vm._v("Reset")
-                                  ])
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        type: "submit",
+                                        color: "success"
+                                      }
+                                    },
+                                    [_vm._v("Reset")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-overlay",
+                                {
+                                  attrs: { absolute: true, value: _vm.overlay }
+                                },
+                                [
+                                  _c("v-progress-circular", {
+                                    attrs: {
+                                      size: 50,
+                                      color: "white",
+                                      indeterminate: ""
+                                    }
+                                  })
                                 ],
                                 1
                               )
@@ -6427,6 +6766,38 @@ var render = function() {
                   )
                 ],
                 1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-snackbar",
+            {
+              attrs: { timeout: 5000, color: "success" },
+              model: {
+                value: _vm.successSnackbar,
+                callback: function($$v) {
+                  _vm.successSnackbar = $$v
+                },
+                expression: "successSnackbar"
+              }
+            },
+            [
+              _vm._v(
+                "\n      Your password has been changed in successfully.\n      "
+              ),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "white", text: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.successSnackbar = false
+                    }
+                  }
+                },
+                [_vm._v("\n        Close\n      ")]
               )
             ],
             1

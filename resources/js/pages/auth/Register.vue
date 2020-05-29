@@ -116,10 +116,10 @@
 
       <v-snackbar
         v-model="successSnackbar"
-        :timeout="3000"
+        :timeout="5000"
         color="success"
       >
-        You've registered and logged in successfully.
+        You has been registered successfully.
         <v-btn
           color="white"
           text
@@ -157,6 +157,7 @@
     methods: {
       register: function() {
         let currentObj = this
+        currentObj.errorAlert = false
         currentObj.overlay = true
         axios.get('/sanctum/csrf-cookie').then(response => {
           axios.post('/api/register', {
@@ -167,18 +168,12 @@
             password_confirmation: currentObj.password_confirmation
           })
           .then(function (response) {
-            const token = response.data.token
-            console.log(token)
-            // add bearer token to localstorage
-            localStorage.setItem('userToken', token)
-
+          
             // after success show successSnackbar
             currentObj.successSnackbar = true
 
             currentObj.overlay = false
-            
-            // after all success redirect to home
-            currentObj.$router.push('/home')
+
 
           })
           .catch(function (error) {

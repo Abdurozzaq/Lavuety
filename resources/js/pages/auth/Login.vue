@@ -94,7 +94,7 @@
         :timeout="5000"
         color="success"
       >
-        You've logged in successfully.
+        You has been logged in successfully.
         <v-btn
           color="white"
           text
@@ -129,6 +129,7 @@
     methods: {
       login: function() {
         let currentObj = this
+        currentObj.errorAlert = false
         currentObj.overlay = true
         axios.get('/sanctum/csrf-cookie').then(response => {
           axios.post('/api/login', {

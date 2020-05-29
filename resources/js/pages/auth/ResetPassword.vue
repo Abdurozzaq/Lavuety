@@ -23,13 +23,27 @@
                 <v-toolbar-title>Reset Password form</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-form>
+
+                <v-alert
+                  v-model="errorAlert"
+                  border="top"
+                  color="red lighten-2"
+                  dark
+                  dismissible
+                >
+                  <ul v-for="(error, index) in serverError" v-bind:key="index">
+                    <li>{{ error[0] }}</li>
+                  </ul>
+                </v-alert>
+
+                <v-form v-on:submit.prevent="resetPass">
 
                   <v-text-field
                     label="Email"
                     name="email"
                     prepend-icon="mail"
                     type="text"
+                    v-model="email"
                   ></v-text-field>
 
                   <v-text-field
@@ -38,6 +52,7 @@
                     name="password"
                     prepend-icon="lock"
                     type="password"
+                    v-model="password"
                   ></v-text-field>
 
                   <v-text-field
@@ -46,10 +61,23 @@
                     name="password-confirmation"
                     prepend-icon="lock"
                     type="password"
+                    v-model="password_confirmation"
                   ></v-text-field>
 
-                  <v-btn color="success">Reset</v-btn>
+                  <v-btn type="submit" color="success">Reset</v-btn>
                 </v-form>
+
+                <v-overlay
+                  :absolute="true"
+                  :value="overlay"
+                >
+                  <v-progress-circular
+                    :size="50"
+                    color="white"
+                    indeterminate
+                  ></v-progress-circular>
+                </v-overlay>
+
               </v-card-text>
               <v-toolbar
                 color="success"
@@ -63,14 +91,80 @@
           </v-col>
         </v-row>
       </v-container>
+
+      <v-snackbar
+        v-model="successSnackbar"
+        :timeout="5000"
+        color="success"
+      >
+        Your password has been changed in successfully.
+        <v-btn
+          color="white"
+          text
+          @click="successSnackbar = false"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
+
     </v-content>
   </v-app>
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     props: {
       source: String,
     },
+
+    data() {
+      return {
+        email: null,
+        password: null,
+        password_confirmation: null,
+        serverError: null,
+        errorAlert: false,
+        successSnackbar: false,
+        overlay: false,
+      }
+    },
+
+    methods: {
+      resetPass: function() {
+        let currentObj = this
+        currentObj.errorAlert = false
+        currentObj.overlay = true
+        axios.get('/sanctum/csrf-cookie').then(response => {
+          const token = this.$route.query.token;
+          axios.post('/api/password/reset', {
+            email: currentObj.email,
+            password: currentObj.password,
+            password_confirmation: currentObj.password_confirmation,
+            token: token
+          })
+          .then(function (response) {
+
+            currentObj.email = null
+            currentObj.password = null
+            currentObj.password_confirmation = null
+
+            // after success show successSnackbar
+            currentObj.successSnackbar = true
+
+            currentObj.overlay = false
+
+
+          })
+          .catch(function (error) {
+            currentObj.overlay = false
+            if(error.response) {
+              currentObj.serverError = error.response.data.errors
+              currentObj.errorAlert = true
+            }
+          })
+        })
+      } // end of login method
+    } // end of methods
   }
 </script>

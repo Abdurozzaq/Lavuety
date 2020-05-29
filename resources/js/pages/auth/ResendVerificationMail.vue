@@ -119,6 +119,7 @@
     methods: {
       resend: function() {
         let currentObj = this
+        currentObj.errorAlert = false
         currentObj.overlay = true
         axios.get('/sanctum/csrf-cookie').then(response => {
           axios.post('/api/email/resend', {
