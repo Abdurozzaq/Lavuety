@@ -10,6 +10,7 @@ import Register from "./pages/auth/Register.vue"
 import ForgotPassword from "./pages/auth/ForgotPassword.vue"
 import ResetPassword from "./pages/auth/ResetPassword.vue"
 import ResendVerificationMail from "./pages/auth/ResendVerificationMail.vue"
+import UnverifiedEmail from "./pages/errorPages/UnverifiedEmail.vue"
 import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue"
 
 import Component from "./components/ExampleComponent.vue"
@@ -54,6 +55,13 @@ const ifNotAuthenticated = (to, from, next) => {
     }
 }
 
+
+/**
+ * Guard For 
+ * Admin Only 
+ * &
+ * User Only  
+ */
 const adminOnly = (to, from, next) => {
     axios.get('/sanctum/csrf-cookie').then(response => {
         axios.get('/api/get-user')
@@ -96,6 +104,32 @@ const userOnly = (to, from, next) => {
     });
 }
 
+/**
+ * Guard For 
+ * Verified User Email
+ */
+const verifiedEmail = (to, from, next) => {
+    axios.get('/sanctum/csrf-cookie').then(response => {
+        axios.get('/api/get-user')
+            .then(function (response) {
+                // handle success
+                let isVerified = response.data.email_verified_at
+                if (isVerified) {
+                    next()
+                    return
+                } else {
+                    next('/UnverifiedEmail')
+                    return
+                }
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    });
+}
+
+
 export const routes = [
     {
         path: "/home",
@@ -104,7 +138,7 @@ export const routes = [
             {
                 path: "",
                 component: Component,
-                beforeEnter: multiguard([ifAuthenticated, userOnly]),
+                beforeEnter: multiguard([ifAuthenticated, userOnly, verifiedEmail]),
             }
         ]
     },
@@ -115,7 +149,7 @@ export const routes = [
             {
                 path: "",
                 component: Component,
-                beforeEnter: multiguard([ifNotAuthenticated, adminOnly]),
+                beforeEnter: multiguard([ifNotAuthenticated, adminOnly, verifiedEmail]),
             },
         ]
     },
@@ -147,6 +181,10 @@ export const routes = [
         path: "/resend-verification-mail",
         component: ResendVerificationMail,
         beforeEnter: multiguard([ifNotAuthenticated]),
+    },
+    {
+        path: "/UnverifiedEmail",
+        component: UnverifiedEmail,
     },
     {
         path: "/verification-success",
