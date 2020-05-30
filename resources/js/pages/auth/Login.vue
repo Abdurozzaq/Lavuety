@@ -138,18 +138,20 @@
           })
           .then(function (response) {
             const token = response.data.token
-            console.log(token)
             // add bearer token to localstorage
             localStorage.setItem('userToken', token)
+
+            if (token) {
+              axios.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token
+            }
+
+            currentObj.overlay = false
 
             // after success show successSnackbar
             currentObj.successSnackbar = true
 
-            currentObj.overlay = false
-
             // after all success redirect to home
             currentObj.$router.push('/home')
-
 
           })
           .catch(function (error) {
