@@ -2750,13 +2750,17 @@ __webpack_require__.r(__webpack_exports__);
           email: currentObj.email,
           password: currentObj.password
         }).then(function (response) {
-          var token = response.data.token;
-          console.log(token); // add bearer token to localstorage
+          var token = response.data.token; // add bearer token to localstorage
 
-          localStorage.setItem('userToken', token); // after success show successSnackbar
+          localStorage.setItem('userToken', token);
 
-          currentObj.successSnackbar = true;
-          currentObj.overlay = false; // after all success redirect to home
+          if (token) {
+            axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token;
+          }
+
+          currentObj.overlay = false; // after success show successSnackbar
+
+          currentObj.successSnackbar = true; // after all success redirect to home
 
           currentObj.$router.push('/home');
         })["catch"](function (error) {
