@@ -25,5 +25,6 @@ Route::post('password/reset', 'Api\Auth\ResetPasswordController@reset')->name('a
 Route::group(['middleware' => 'auth:sanctum'], function() {
     // For User Profile
     Route::get('get-user', 'Api\Auth\AuthController@getUser');
-
+    // For Log Out
+    Route::get('logout', 'Api\Auth\AuthController@logoutCurrentUser');
 });

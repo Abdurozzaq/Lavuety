@@ -2194,14 +2194,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
   },
   data: function data() {
     return {
+      fav: true,
+      menu: false,
+      message: false,
+      hints: true,
       dialog: false,
       drawer: null,
+      itemPopup: 1,
+      itemsPopup: [{
+        text: 'Home',
+        icon: 'mdi-view-dashboard',
+        url: '/home'
+      }, {
+        text: 'Settings',
+        icon: 'mdi-account',
+        url: '/settings'
+      }],
       items: [{
         icon: 'mdi-view-dashboard',
         text: 'Home',
@@ -2401,15 +2468,84 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
   },
   data: function data() {
     return {
+      fav: true,
+      menu: false,
+      message: false,
+      hints: true,
       dialog: false,
       drawer: null,
-      items: [{
+      itemPopup: 1,
+      itemsPopup: [{
+        text: 'Home',
+        icon: 'mdi-view-dashboard',
+        url: '/home'
+      }, {
+        text: 'Settings',
+        icon: 'mdi-account',
+        url: '/settings'
+      }],
+      sidebar: [{
         icon: 'mdi-view-dashboard',
         text: 'Home',
         link: '/'
@@ -4952,19 +5088,169 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "v-btn",
-            { attrs: { icon: "", large: "" } },
+            "v-menu",
+            {
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-width": 200,
+                "offset-x": ""
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-btn",
+                        _vm._g({ attrs: { icon: "", large: "" } }, on),
+                        [
+                          _c(
+                            "v-avatar",
+                            { attrs: { size: "32px", item: "" } },
+                            [
+                              _c("v-img", {
+                                attrs: {
+                                  src:
+                                    "https://cdn.vuetifyjs.com/images/logos/logo.svg",
+                                  alt: "Vuetify"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.menu,
+                callback: function($$v) {
+                  _vm.menu = $$v
+                },
+                expression: "menu"
+              }
+            },
             [
+              _vm._v(" "),
               _c(
-                "v-avatar",
-                { attrs: { size: "32px", item: "" } },
+                "v-card",
                 [
-                  _c("v-img", {
-                    attrs: {
-                      src: "https://cdn.vuetifyjs.com/images/logos/logo.svg",
-                      alt: "Vuetify"
-                    }
-                  })
+                  _c(
+                    "v-list",
+                    [
+                      _c(
+                        "v-list-item",
+                        [
+                          _c("v-list-item-avatar", [
+                            _c("img", {
+                              attrs: {
+                                src:
+                                  "https://cdn.vuetifyjs.com/images/john.jpg",
+                                alt: "John"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-item-content",
+                            [
+                              _c("v-list-item-title", [_vm._v("John Leider")]),
+                              _vm._v(" "),
+                              _c("v-list-item-subtitle", [
+                                _vm._v("Founder of Vuetify.js")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _c(
+                    "v-list",
+                    { attrs: { shaped: "", dense: "" } },
+                    [
+                      _c("v-subheader", [_vm._v("REPORTS")]),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-group",
+                        {
+                          attrs: { color: "primary" },
+                          model: {
+                            value: _vm.itemPopup,
+                            callback: function($$v) {
+                              _vm.itemPopup = $$v
+                            },
+                            expression: "itemPopup"
+                          }
+                        },
+                        _vm._l(_vm.itemsPopup, function(ip, i) {
+                          return _c(
+                            "v-list-item",
+                            { key: i, attrs: { href: ip.url } },
+                            [
+                              _c(
+                                "v-list-item-icon",
+                                [
+                                  _c("v-icon", {
+                                    domProps: { textContent: _vm._s(ip.icon) }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-item-content",
+                                [
+                                  _c("v-list-item-title", {
+                                    domProps: { textContent: _vm._s(ip.text) }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { text: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.menu = false
+                            }
+                          }
+                        },
+                        [_vm._v("Close")]
+                      ),
+                      _vm._v(" "),
+                      _c("v-btn", { attrs: { text: "", color: "danger" } }, [
+                        _vm._v("Logout")
+                      ])
+                    ],
+                    1
+                  )
                 ],
                 1
               )
@@ -5079,22 +5365,25 @@ var render = function() {
             "v-list",
             { attrs: { dense: "" } },
             [
-              _vm._l(_vm.items, function(item) {
+              _vm._l(_vm.sidebar, function(sidebarItem) {
                 return [
-                  item.heading
+                  sidebarItem.heading
                     ? _c(
                         "v-row",
-                        { key: item.heading, attrs: { align: "center" } },
+                        {
+                          key: sidebarItem.heading,
+                          attrs: { align: "center" }
+                        },
                         [
                           _c(
                             "v-col",
                             { attrs: { cols: "6" } },
                             [
-                              item.heading
+                              sidebarItem.heading
                                 ? _c("v-subheader", [
                                     _vm._v(
                                       "\n              " +
-                                        _vm._s(item.heading) +
+                                        _vm._s(sidebarItem.heading) +
                                         "\n            "
                                     )
                                   ])
@@ -5123,15 +5412,15 @@ var render = function() {
                         ],
                         1
                       )
-                    : item.children
+                    : sidebarItem.children
                     ? _c(
                         "v-list-group",
                         {
-                          key: item.text,
+                          key: sidebarItem.text,
                           attrs: {
-                            "prepend-icon": item.model
-                              ? item.icon
-                              : item["icon-alt"],
+                            "prepend-icon": sidebarItem.model
+                              ? sidebarItem.icon
+                              : sidebarItem["icon-alt"],
                             "append-icon": ""
                           },
                           scopedSlots: _vm._u(
@@ -5146,7 +5435,7 @@ var render = function() {
                                         _c("v-list-item-title", [
                                           _vm._v(
                                             "\n                " +
-                                              _vm._s(item.text) +
+                                              _vm._s(sidebarItem.text) +
                                               "\n              "
                                           )
                                         ])
@@ -5162,16 +5451,16 @@ var render = function() {
                             true
                           ),
                           model: {
-                            value: item.model,
+                            value: sidebarItem.model,
                             callback: function($$v) {
-                              _vm.$set(item, "model", $$v)
+                              _vm.$set(sidebarItem, "model", $$v)
                             },
-                            expression: "item.model"
+                            expression: "sidebarItem.model"
                           }
                         },
                         [
                           _vm._v(" "),
-                          _vm._l(item.children, function(child, i) {
+                          _vm._l(sidebarItem.children, function(child, i) {
                             return _c(
                               "v-list-item",
                               { key: i, attrs: { link: "", href: child.link } },
@@ -5211,13 +5500,13 @@ var render = function() {
                     : _c(
                         "v-list-item",
                         {
-                          key: item.text,
-                          attrs: { link: "", href: item.link }
+                          key: sidebarItem.text,
+                          attrs: { link: "", href: sidebarItem.link }
                         },
                         [
                           _c(
                             "v-list-item-action",
-                            [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
+                            [_c("v-icon", [_vm._v(_vm._s(sidebarItem.icon))])],
                             1
                           ),
                           _vm._v(" "),
@@ -5227,7 +5516,7 @@ var render = function() {
                               _c("v-list-item-title", [
                                 _vm._v(
                                   "\n              " +
-                                    _vm._s(item.text) +
+                                    _vm._s(sidebarItem.text) +
                                     "\n            "
                                 )
                               ])
@@ -5304,19 +5593,169 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "v-btn",
-            { attrs: { icon: "", large: "" } },
+            "v-menu",
+            {
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-width": 200,
+                "offset-x": ""
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-btn",
+                        _vm._g({ attrs: { icon: "", large: "" } }, on),
+                        [
+                          _c(
+                            "v-avatar",
+                            { attrs: { size: "32px", item: "" } },
+                            [
+                              _c("v-img", {
+                                attrs: {
+                                  src:
+                                    "https://cdn.vuetifyjs.com/images/logos/logo.svg",
+                                  alt: "Vuetify"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.menu,
+                callback: function($$v) {
+                  _vm.menu = $$v
+                },
+                expression: "menu"
+              }
+            },
             [
+              _vm._v(" "),
               _c(
-                "v-avatar",
-                { attrs: { size: "32px", item: "" } },
+                "v-card",
                 [
-                  _c("v-img", {
-                    attrs: {
-                      src: "https://cdn.vuetifyjs.com/images/logos/logo.svg",
-                      alt: "Vuetify"
-                    }
-                  })
+                  _c(
+                    "v-list",
+                    [
+                      _c(
+                        "v-list-item",
+                        [
+                          _c("v-list-item-avatar", [
+                            _c("img", {
+                              attrs: {
+                                src:
+                                  "https://cdn.vuetifyjs.com/images/john.jpg",
+                                alt: "John"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-item-content",
+                            [
+                              _c("v-list-item-title", [_vm._v("John Leider")]),
+                              _vm._v(" "),
+                              _c("v-list-item-subtitle", [
+                                _vm._v("Founder of Vuetify.js")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _c(
+                    "v-list",
+                    { attrs: { shaped: "", dense: "" } },
+                    [
+                      _c("v-subheader", [_vm._v("REPORTS")]),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-group",
+                        {
+                          attrs: { color: "primary" },
+                          model: {
+                            value: _vm.itemPopup,
+                            callback: function($$v) {
+                              _vm.itemPopup = $$v
+                            },
+                            expression: "itemPopup"
+                          }
+                        },
+                        _vm._l(_vm.itemsPopup, function(ip, i) {
+                          return _c(
+                            "v-list-item",
+                            { key: i, attrs: { href: ip.url } },
+                            [
+                              _c(
+                                "v-list-item-icon",
+                                [
+                                  _c("v-icon", {
+                                    domProps: { textContent: _vm._s(ip.icon) }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-item-content",
+                                [
+                                  _c("v-list-item-title", {
+                                    domProps: { textContent: _vm._s(ip.text) }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { text: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.menu = false
+                            }
+                          }
+                        },
+                        [_vm._v("Close")]
+                      ),
+                      _vm._v(" "),
+                      _c("v-btn", { attrs: { text: "", color: "danger" } }, [
+                        _vm._v("Logout")
+                      ])
+                    ],
+                    1
+                  )
                 ],
                 1
               )

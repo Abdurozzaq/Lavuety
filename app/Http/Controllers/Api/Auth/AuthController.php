@@ -36,12 +36,21 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function getUser(){
+    public function getUser(Request $request){
         return response()->json([
             'status' => 'Success',
             //LALU PADA METHOD createToken(), TAMBAHKAN PARAMETER ABILITIESNYA
             'user' => Auth::user(),
-            'role' =>Auth::user()->roles->pluck('name')
+            'role' => Auth::user()->roles->pluck('name'),
+        ], 200);
+    }
+
+    public function logoutCurrentUser() {
+        Auth::user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'Token Deleted / Logged Out'
         ], 200);
     }
 

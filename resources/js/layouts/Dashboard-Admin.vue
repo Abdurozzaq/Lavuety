@@ -104,19 +104,72 @@
       <v-btn icon>
         <v-icon>mdi-bell</v-icon>
       </v-btn>
-      <v-btn
-        icon
-        large
+      <v-menu
+        v-model="menu"
+        :close-on-content-click="false"
+        :nudge-width="200"
+        offset-x
       >
-        <v-avatar
-          size="32px"
-          item
-        >
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-            alt="Vuetify"
-          ></v-img></v-avatar>
-      </v-btn>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            large
+            v-on="on"
+          >
+            <v-avatar
+              size="32px"
+              item
+            >
+              <v-img
+                src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
+                alt="Vuetify"
+              ></v-img></v-avatar>
+          </v-btn>
+        </template>
+
+        <v-card>
+          <v-list>
+            <v-list-item>
+              <v-list-item-avatar>
+                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+              </v-list-item-avatar>
+
+              <v-list-item-content>
+                <v-list-item-title>John Leider</v-list-item-title>
+                <v-list-item-subtitle>Founder of Vuetify.js</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+
+          <v-divider></v-divider>
+
+          <v-list shaped dense>
+            <v-subheader>REPORTS</v-subheader>
+            <v-list-item-group v-model="itemPopup" color="primary">
+              <v-list-item
+                v-for="(ip, i) in itemsPopup"
+                :key="i"
+                :href="ip.url"
+              >
+                <v-list-item-icon>
+                  <v-icon v-text="ip.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="ip.text"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+                 
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn text @click="menu = false">Close</v-btn>
+            <v-btn text color="danger">Logout</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-menu>
     </v-app-bar>
     <v-content>
       <v-container
@@ -153,8 +206,19 @@
       source: String,
     },
     data: () => ({
+      fav: true,
+      menu: false,
+      message: false,
+      hints: true,
       dialog: false,
       drawer: null,
+
+      itemPopup: 1,
+      itemsPopup: [
+        { text: 'Home', icon: 'mdi-view-dashboard', url: '/home' },
+        { text: 'Settings', icon: 'mdi-account', url: '/settings' },
+      ],
+
       items: [
         { icon: 'mdi-view-dashboard', text: 'Home', link: '/' },
         // { icon: 'mdi-contacts', text: 'Contacts' },
