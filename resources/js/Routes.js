@@ -113,7 +113,7 @@ const verifiedEmail = (to, from, next) => {
         axios.get('/api/get-user')
             .then(function (response) {
                 // handle success
-                let isVerified = response.data.email_verified_at
+                let isVerified = response.data.user.email_verified_at
                 if (isVerified) {
                     next()
                     return
@@ -149,7 +149,7 @@ export const routes = [
             {
                 path: "",
                 component: Component,
-                beforeEnter: multiguard([ifNotAuthenticated, adminOnly, verifiedEmail]),
+                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail]),
             },
         ]
     },

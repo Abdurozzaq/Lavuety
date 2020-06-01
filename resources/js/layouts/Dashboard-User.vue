@@ -6,15 +6,15 @@
       app
     >
       <v-list dense>
-        <template v-for="item in items">
+        <template v-for="sidebarItem in sidebar">
           <v-row
-            v-if="item.heading"
-            :key="item.heading"
+            v-if="sidebarItem.heading"
+            :key="sidebarItem.heading"
             align="center"
           >
             <v-col cols="6">
-              <v-subheader v-if="item.heading">
-                {{ item.heading }}
+              <v-subheader v-if="sidebarItem.heading">
+                {{ sidebarItem.heading }}
               </v-subheader>
             </v-col>
             <v-col
@@ -28,21 +28,21 @@
             </v-col>
           </v-row>
           <v-list-group
-            v-else-if="item.children"
-            :key="item.text"
-            v-model="item.model"
-            :prepend-icon="item.model ? item.icon : item['icon-alt']"
+            v-else-if="sidebarItem.children"
+            :key="sidebarItem.text"
+            v-model="sidebarItem.model"
+            :prepend-icon="sidebarItem.model ? sidebarItem.icon : sidebarItem['icon-alt']"
             append-icon=""
           >
             <template v-slot:activator>
               <v-list-item-content>
                 <v-list-item-title>
-                  {{ item.text }}
+                  {{ sidebarItem.text }}
                 </v-list-item-title>
               </v-list-item-content>
             </template>
             <v-list-item
-              v-for="(child, i) in item.children"
+              v-for="(child, i) in sidebarItem.children"
               :key="i"
               link
               :href="child.link"
@@ -59,16 +59,16 @@
           </v-list-group>
           <v-list-item
             v-else
-            :key="item.text"
+            :key="sidebarItem.text"
             link
-            :href="item.link"
+            :href="sidebarItem.link"
           >
             <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>{{ sidebarItem.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>
-                {{ item.text }}
+                {{ sidebarItem.text }}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -104,19 +104,74 @@
       <v-btn icon>
         <v-icon>mdi-bell</v-icon>
       </v-btn>
-      <v-btn
-        icon
-        large
+      
+
+      <v-menu
+        v-model="menu"
+        :close-on-content-click="false"
+        :nudge-width="200"
+        offset-x
       >
-        <v-avatar
-          size="32px"
-          item
-        >
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-            alt="Vuetify"
-          ></v-img></v-avatar>
-      </v-btn>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            large
+            v-on="on"
+          >
+            <v-avatar
+              size="32px"
+              item
+            >
+              <v-img
+                src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
+                alt="Vuetify"
+              ></v-img></v-avatar>
+          </v-btn>
+        </template>
+
+        <v-card>
+          <v-list>
+            <v-list-item>
+              <v-list-item-avatar>
+                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+              </v-list-item-avatar>
+
+              <v-list-item-content>
+                <v-list-item-title>John Leider</v-list-item-title>
+                <v-list-item-subtitle>Founder of Vuetify.js</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+
+          <v-divider></v-divider>
+
+          <v-list shaped dense>
+            <v-subheader>REPORTS</v-subheader>
+            <v-list-item-group v-model="itemPopup" color="primary">
+              <v-list-item
+                v-for="(ip, i) in itemsPopup"
+                :key="i"
+                :href="ip.url"
+              >
+                <v-list-item-icon>
+                  <v-icon v-text="ip.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="ip.text"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+                 
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn text @click="menu = false">Close</v-btn>
+            <v-btn text @click="logout" color="danger">Logout</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-menu>
     </v-app-bar>
     <v-content>
       <v-container
@@ -148,46 +203,44 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     props: {
       source: String,
     },
     data: () => ({
+      fav: true,
+      menu: false,
+      message: false,
+      hints: true,
       dialog: false,
       drawer: null,
-      items: [
-        { icon: 'mdi-view-dashboard', text: 'Home', link: '/' },
-        // { icon: 'mdi-contacts', text: 'Contacts' },
-        // { icon: 'mdi-history', text: 'Frequently contacted' },
-        // { icon: 'mdi-content-copy', text: 'Duplicates' },
-        // {
-        //   icon: 'mdi-chevron-up',
-        //   'icon-alt': 'mdi-chevron-down',
-        //   text: 'Labels',
-        //   model: true,
-        //   children: [
-        //     { icon: 'mdi-plus', text: 'Create label' },
-        //   ],
-        // },
-        // {
-        //   icon: 'mdi-chevron-up',
-        //   'icon-alt': 'mdi-chevron-down',
-        //   text: 'More',
-        //   model: false,
-        //   children: [
-        //     { text: 'Import' },
-        //     { text: 'Export' },
-        //     { text: 'Print' },
-        //     { text: 'Undo changes' },
-        //     { text: 'Other contacts' },
-        //   ],
-        // },
-        // { icon: 'mdi-settings', text: 'Settings' },
-        // { icon: 'mdi-message', text: 'Send feedback' },
-        // { icon: 'mdi-help-circle', text: 'Help' },
-        // { icon: 'mdi-cellphone-link', text: 'App downloads' },
-        // { icon: 'mdi-keyboard', text: 'Go to the old version' },
+
+      itemPopup: 1,
+      itemsPopup: [
+        { text: 'Home', icon: 'mdi-view-dashboard', url: '/home' },
+        { text: 'Settings', icon: 'mdi-account', url: '/settings' },
       ],
-    }),
+
+      sidebar: [
+        { icon: 'mdi-view-dashboard', text: 'Home', link: '/' },
+      ],
+    }), // end of data
+
+    methods: {
+      logout: function() {
+        let currentObj = this
+        axios.get('/sanctum/csrf-cookie').then(response => {
+          axios.post('/api/logout')
+          .then(function (response) {
+            localStorage.removeItem('userToken')
+            currentObj.$router.push('/login')
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        });
+      }
+    }
   }
 </script>

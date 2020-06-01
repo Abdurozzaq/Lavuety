@@ -2045,6 +2045,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2194,50 +2196,102 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
   },
   data: function data() {
     return {
+      fav: true,
+      menu: false,
+      message: false,
+      hints: true,
       dialog: false,
       drawer: null,
-      items: [{
+      itemPopup: 1,
+      itemsPopup: [{
+        text: 'Home',
+        icon: 'mdi-view-dashboard',
+        url: '/home'
+      }, {
+        text: 'Settings',
+        icon: 'mdi-account',
+        url: '/settings'
+      }],
+      sidebar: [{
         icon: 'mdi-view-dashboard',
         text: 'Home',
         link: '/'
-      } // { icon: 'mdi-contacts', text: 'Contacts' },
-      // { icon: 'mdi-history', text: 'Frequently contacted' },
-      // { icon: 'mdi-content-copy', text: 'Duplicates' },
-      // {
-      //   icon: 'mdi-chevron-up',
-      //   'icon-alt': 'mdi-chevron-down',
-      //   text: 'Labels',
-      //   model: true,
-      //   children: [
-      //     { icon: 'mdi-plus', text: 'Create label' },
-      //   ],
-      // },
-      // {
-      //   icon: 'mdi-chevron-up',
-      //   'icon-alt': 'mdi-chevron-down',
-      //   text: 'More',
-      //   model: false,
-      //   children: [
-      //     { text: 'Import' },
-      //     { text: 'Export' },
-      //     { text: 'Print' },
-      //     { text: 'Undo changes' },
-      //     { text: 'Other contacts' },
-      //   ],
-      // },
-      // { icon: 'mdi-settings', text: 'Settings' },
-      // { icon: 'mdi-message', text: 'Send feedback' },
-      // { icon: 'mdi-help-circle', text: 'Help' },
-      // { icon: 'mdi-cellphone-link', text: 'App downloads' },
-      // { icon: 'mdi-keyboard', text: 'Go to the old version' },
-      ]
+      }]
     };
+  },
+  // end of data
+  methods: {
+    logout: function logout() {
+      var currentObj = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/logout').then(function (response) {
+          localStorage.removeItem('userToken');
+          currentObj.$router.push('/login');
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      });
+    }
   }
 });
 
@@ -2252,6 +2306,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2401,50 +2457,104 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
   },
   data: function data() {
     return {
+      fav: true,
+      menu: false,
+      message: false,
+      hints: true,
       dialog: false,
       drawer: null,
-      items: [{
+      itemPopup: 1,
+      itemsPopup: [{
+        text: 'Home',
+        icon: 'mdi-view-dashboard',
+        url: '/home'
+      }, {
+        text: 'Settings',
+        icon: 'mdi-account',
+        url: '/settings'
+      }],
+      sidebar: [{
         icon: 'mdi-view-dashboard',
         text: 'Home',
         link: '/'
-      } // { icon: 'mdi-contacts', text: 'Contacts' },
-      // { icon: 'mdi-history', text: 'Frequently contacted' },
-      // { icon: 'mdi-content-copy', text: 'Duplicates' },
-      // {
-      //   icon: 'mdi-chevron-up',
-      //   'icon-alt': 'mdi-chevron-down',
-      //   text: 'Labels',
-      //   model: true,
-      //   children: [
-      //     { icon: 'mdi-plus', text: 'Create label' },
-      //   ],
-      // },
-      // {
-      //   icon: 'mdi-chevron-up',
-      //   'icon-alt': 'mdi-chevron-down',
-      //   text: 'More',
-      //   model: false,
-      //   children: [
-      //     { text: 'Import' },
-      //     { text: 'Export' },
-      //     { text: 'Print' },
-      //     { text: 'Undo changes' },
-      //     { text: 'Other contacts' },
-      //   ],
-      // },
-      // { icon: 'mdi-settings', text: 'Settings' },
-      // { icon: 'mdi-message', text: 'Send feedback' },
-      // { icon: 'mdi-help-circle', text: 'Help' },
-      // { icon: 'mdi-cellphone-link', text: 'App downloads' },
-      // { icon: 'mdi-keyboard', text: 'Go to the old version' },
-      ]
+      }]
     };
+  },
+  // end of data
+  methods: {
+    logout: function logout() {
+      var currentObj = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/logout').then(function (response) {
+          localStorage.removeItem('userToken');
+          currentObj.$router.push('/login');
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      });
+    }
   }
 });
 
@@ -2725,6 +2835,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2737,7 +2849,8 @@ __webpack_require__.r(__webpack_exports__);
       serverError: null,
       errorAlert: false,
       successSnackbar: false,
-      overlay: false
+      overlay: false,
+      serverErrorCode: null
     };
   },
   methods: {
@@ -2750,26 +2863,37 @@ __webpack_require__.r(__webpack_exports__);
           email: currentObj.email,
           password: currentObj.password
         }).then(function (response) {
-          var token = response.data.token; // add bearer token to localstorage
+          var token = response.data.token;
+          console.log(token); // add bearer token to localstorage
 
           localStorage.setItem('userToken', token);
 
           if (token) {
             axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token;
+          } // after success show successSnackbar
+
+
+          currentObj.successSnackbar = true;
+          currentObj.overlay = false; // after all success redirect to home
+
+          if (response.data.role == 'admin') {
+            currentObj.$router.push('/siAdmino');
+          } else {
+            currentObj.$router.push('/home');
           }
-
-          currentObj.overlay = false; // after success show successSnackbar
-
-          currentObj.successSnackbar = true; // after all success redirect to home
-
-          currentObj.$router.push('/home');
         })["catch"](function (error) {
           localStorage.removeItem('userToken');
           currentObj.overlay = false;
 
           if (error.response) {
-            currentObj.serverError = error.response.data.errors;
-            currentObj.errorAlert = true;
+            if (error.response.data.code) {
+              currentObj.serverError = error.response.data.errors;
+              currentObj.errorAlert = true;
+              currentObj.$router.push('/UnverifiedEmail');
+            } else {
+              currentObj.serverError = error.response.data.errors;
+              currentObj.errorAlert = true;
+            }
           }
         });
       });
@@ -4877,22 +5001,25 @@ var render = function() {
             "v-list",
             { attrs: { dense: "" } },
             [
-              _vm._l(_vm.items, function(item) {
+              _vm._l(_vm.sidebar, function(sidebarItem) {
                 return [
-                  item.heading
+                  sidebarItem.heading
                     ? _c(
                         "v-row",
-                        { key: item.heading, attrs: { align: "center" } },
+                        {
+                          key: sidebarItem.heading,
+                          attrs: { align: "center" }
+                        },
                         [
                           _c(
                             "v-col",
                             { attrs: { cols: "6" } },
                             [
-                              item.heading
+                              sidebarItem.heading
                                 ? _c("v-subheader", [
                                     _vm._v(
                                       "\n              " +
-                                        _vm._s(item.heading) +
+                                        _vm._s(sidebarItem.heading) +
                                         "\n            "
                                     )
                                   ])
@@ -4921,15 +5048,15 @@ var render = function() {
                         ],
                         1
                       )
-                    : item.children
+                    : sidebarItem.children
                     ? _c(
                         "v-list-group",
                         {
-                          key: item.text,
+                          key: sidebarItem.text,
                           attrs: {
-                            "prepend-icon": item.model
-                              ? item.icon
-                              : item["icon-alt"],
+                            "prepend-icon": sidebarItem.model
+                              ? sidebarItem.icon
+                              : sidebarItem["icon-alt"],
                             "append-icon": ""
                           },
                           scopedSlots: _vm._u(
@@ -4944,7 +5071,7 @@ var render = function() {
                                         _c("v-list-item-title", [
                                           _vm._v(
                                             "\n                " +
-                                              _vm._s(item.text) +
+                                              _vm._s(sidebarItem.text) +
                                               "\n              "
                                           )
                                         ])
@@ -4960,16 +5087,16 @@ var render = function() {
                             true
                           ),
                           model: {
-                            value: item.model,
+                            value: sidebarItem.model,
                             callback: function($$v) {
-                              _vm.$set(item, "model", $$v)
+                              _vm.$set(sidebarItem, "model", $$v)
                             },
-                            expression: "item.model"
+                            expression: "sidebarItem.model"
                           }
                         },
                         [
                           _vm._v(" "),
-                          _vm._l(item.children, function(child, i) {
+                          _vm._l(sidebarItem.children, function(child, i) {
                             return _c(
                               "v-list-item",
                               { key: i, attrs: { link: "", href: child.link } },
@@ -5009,13 +5136,13 @@ var render = function() {
                     : _c(
                         "v-list-item",
                         {
-                          key: item.text,
-                          attrs: { link: "", href: item.link }
+                          key: sidebarItem.text,
+                          attrs: { link: "", href: sidebarItem.link }
                         },
                         [
                           _c(
                             "v-list-item-action",
-                            [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
+                            [_c("v-icon", [_vm._v(_vm._s(sidebarItem.icon))])],
                             1
                           ),
                           _vm._v(" "),
@@ -5025,7 +5152,7 @@ var render = function() {
                               _c("v-list-item-title", [
                                 _vm._v(
                                   "\n              " +
-                                    _vm._s(item.text) +
+                                    _vm._s(sidebarItem.text) +
                                     "\n            "
                                 )
                               ])
@@ -5103,19 +5230,174 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "v-btn",
-            { attrs: { icon: "", large: "" } },
+            "v-menu",
+            {
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-width": 200,
+                "offset-x": ""
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-btn",
+                        _vm._g({ attrs: { icon: "", large: "" } }, on),
+                        [
+                          _c(
+                            "v-avatar",
+                            { attrs: { size: "32px", item: "" } },
+                            [
+                              _c("v-img", {
+                                attrs: {
+                                  src:
+                                    "https://cdn.vuetifyjs.com/images/logos/logo.svg",
+                                  alt: "Vuetify"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.menu,
+                callback: function($$v) {
+                  _vm.menu = $$v
+                },
+                expression: "menu"
+              }
+            },
             [
+              _vm._v(" "),
               _c(
-                "v-avatar",
-                { attrs: { size: "32px", item: "" } },
+                "v-card",
                 [
-                  _c("v-img", {
-                    attrs: {
-                      src: "https://cdn.vuetifyjs.com/images/logos/logo.svg",
-                      alt: "Vuetify"
-                    }
-                  })
+                  _c(
+                    "v-list",
+                    [
+                      _c(
+                        "v-list-item",
+                        [
+                          _c("v-list-item-avatar", [
+                            _c("img", {
+                              attrs: {
+                                src:
+                                  "https://cdn.vuetifyjs.com/images/john.jpg",
+                                alt: "John"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-item-content",
+                            [
+                              _c("v-list-item-title", [_vm._v("John Leider")]),
+                              _vm._v(" "),
+                              _c("v-list-item-subtitle", [
+                                _vm._v("Founder of Vuetify.js")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _c(
+                    "v-list",
+                    { attrs: { shaped: "", dense: "" } },
+                    [
+                      _c("v-subheader", [_vm._v("REPORTS")]),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-group",
+                        {
+                          attrs: { color: "primary" },
+                          model: {
+                            value: _vm.itemPopup,
+                            callback: function($$v) {
+                              _vm.itemPopup = $$v
+                            },
+                            expression: "itemPopup"
+                          }
+                        },
+                        _vm._l(_vm.itemsPopup, function(ip, i) {
+                          return _c(
+                            "v-list-item",
+                            { key: i, attrs: { href: ip.url } },
+                            [
+                              _c(
+                                "v-list-item-icon",
+                                [
+                                  _c("v-icon", {
+                                    domProps: { textContent: _vm._s(ip.icon) }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-item-content",
+                                [
+                                  _c("v-list-item-title", {
+                                    domProps: { textContent: _vm._s(ip.text) }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { text: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.menu = false
+                            }
+                          }
+                        },
+                        [_vm._v("Close")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { text: "", color: "danger" },
+                          on: { click: _vm.logout }
+                        },
+                        [_vm._v("Logout")]
+                      )
+                    ],
+                    1
+                  )
                 ],
                 1
               )
@@ -5230,22 +5512,25 @@ var render = function() {
             "v-list",
             { attrs: { dense: "" } },
             [
-              _vm._l(_vm.items, function(item) {
+              _vm._l(_vm.sidebar, function(sidebarItem) {
                 return [
-                  item.heading
+                  sidebarItem.heading
                     ? _c(
                         "v-row",
-                        { key: item.heading, attrs: { align: "center" } },
+                        {
+                          key: sidebarItem.heading,
+                          attrs: { align: "center" }
+                        },
                         [
                           _c(
                             "v-col",
                             { attrs: { cols: "6" } },
                             [
-                              item.heading
+                              sidebarItem.heading
                                 ? _c("v-subheader", [
                                     _vm._v(
                                       "\n              " +
-                                        _vm._s(item.heading) +
+                                        _vm._s(sidebarItem.heading) +
                                         "\n            "
                                     )
                                   ])
@@ -5274,15 +5559,15 @@ var render = function() {
                         ],
                         1
                       )
-                    : item.children
+                    : sidebarItem.children
                     ? _c(
                         "v-list-group",
                         {
-                          key: item.text,
+                          key: sidebarItem.text,
                           attrs: {
-                            "prepend-icon": item.model
-                              ? item.icon
-                              : item["icon-alt"],
+                            "prepend-icon": sidebarItem.model
+                              ? sidebarItem.icon
+                              : sidebarItem["icon-alt"],
                             "append-icon": ""
                           },
                           scopedSlots: _vm._u(
@@ -5297,7 +5582,7 @@ var render = function() {
                                         _c("v-list-item-title", [
                                           _vm._v(
                                             "\n                " +
-                                              _vm._s(item.text) +
+                                              _vm._s(sidebarItem.text) +
                                               "\n              "
                                           )
                                         ])
@@ -5313,16 +5598,16 @@ var render = function() {
                             true
                           ),
                           model: {
-                            value: item.model,
+                            value: sidebarItem.model,
                             callback: function($$v) {
-                              _vm.$set(item, "model", $$v)
+                              _vm.$set(sidebarItem, "model", $$v)
                             },
-                            expression: "item.model"
+                            expression: "sidebarItem.model"
                           }
                         },
                         [
                           _vm._v(" "),
-                          _vm._l(item.children, function(child, i) {
+                          _vm._l(sidebarItem.children, function(child, i) {
                             return _c(
                               "v-list-item",
                               { key: i, attrs: { link: "", href: child.link } },
@@ -5362,13 +5647,13 @@ var render = function() {
                     : _c(
                         "v-list-item",
                         {
-                          key: item.text,
-                          attrs: { link: "", href: item.link }
+                          key: sidebarItem.text,
+                          attrs: { link: "", href: sidebarItem.link }
                         },
                         [
                           _c(
                             "v-list-item-action",
-                            [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
+                            [_c("v-icon", [_vm._v(_vm._s(sidebarItem.icon))])],
                             1
                           ),
                           _vm._v(" "),
@@ -5378,7 +5663,7 @@ var render = function() {
                               _c("v-list-item-title", [
                                 _vm._v(
                                   "\n              " +
-                                    _vm._s(item.text) +
+                                    _vm._s(sidebarItem.text) +
                                     "\n            "
                                 )
                               ])
@@ -5455,19 +5740,174 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "v-btn",
-            { attrs: { icon: "", large: "" } },
+            "v-menu",
+            {
+              attrs: {
+                "close-on-content-click": false,
+                "nudge-width": 200,
+                "offset-x": ""
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-btn",
+                        _vm._g({ attrs: { icon: "", large: "" } }, on),
+                        [
+                          _c(
+                            "v-avatar",
+                            { attrs: { size: "32px", item: "" } },
+                            [
+                              _c("v-img", {
+                                attrs: {
+                                  src:
+                                    "https://cdn.vuetifyjs.com/images/logos/logo.svg",
+                                  alt: "Vuetify"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.menu,
+                callback: function($$v) {
+                  _vm.menu = $$v
+                },
+                expression: "menu"
+              }
+            },
             [
+              _vm._v(" "),
               _c(
-                "v-avatar",
-                { attrs: { size: "32px", item: "" } },
+                "v-card",
                 [
-                  _c("v-img", {
-                    attrs: {
-                      src: "https://cdn.vuetifyjs.com/images/logos/logo.svg",
-                      alt: "Vuetify"
-                    }
-                  })
+                  _c(
+                    "v-list",
+                    [
+                      _c(
+                        "v-list-item",
+                        [
+                          _c("v-list-item-avatar", [
+                            _c("img", {
+                              attrs: {
+                                src:
+                                  "https://cdn.vuetifyjs.com/images/john.jpg",
+                                alt: "John"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-item-content",
+                            [
+                              _c("v-list-item-title", [_vm._v("John Leider")]),
+                              _vm._v(" "),
+                              _c("v-list-item-subtitle", [
+                                _vm._v("Founder of Vuetify.js")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _c(
+                    "v-list",
+                    { attrs: { shaped: "", dense: "" } },
+                    [
+                      _c("v-subheader", [_vm._v("REPORTS")]),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-group",
+                        {
+                          attrs: { color: "primary" },
+                          model: {
+                            value: _vm.itemPopup,
+                            callback: function($$v) {
+                              _vm.itemPopup = $$v
+                            },
+                            expression: "itemPopup"
+                          }
+                        },
+                        _vm._l(_vm.itemsPopup, function(ip, i) {
+                          return _c(
+                            "v-list-item",
+                            { key: i, attrs: { href: ip.url } },
+                            [
+                              _c(
+                                "v-list-item-icon",
+                                [
+                                  _c("v-icon", {
+                                    domProps: { textContent: _vm._s(ip.icon) }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-item-content",
+                                [
+                                  _c("v-list-item-title", {
+                                    domProps: { textContent: _vm._s(ip.text) }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        }),
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { text: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.menu = false
+                            }
+                          }
+                        },
+                        [_vm._v("Close")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { text: "", color: "danger" },
+                          on: { click: _vm.logout }
+                        },
+                        [_vm._v("Logout")]
+                      )
+                    ],
+                    1
+                  )
                 ],
                 1
               )
@@ -5861,7 +6301,13 @@ var render = function() {
                                 },
                                 _vm._l(_vm.serverError, function(error, index) {
                                   return _c("ul", { key: index }, [
-                                    _c("li", [_vm._v(_vm._s(error[0]))])
+                                    _c("li", [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(error[0]) +
+                                          " \n                  "
+                                      )
+                                    ])
                                   ])
                                 }),
                                 0
@@ -64224,7 +64670,7 @@ var verifiedEmail = function verifiedEmail(to, from, next) {
   axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function (response) {
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/get-user').then(function (response) {
       // handle success
-      var isVerified = response.data.email_verified_at;
+      var isVerified = response.data.user.email_verified_at;
 
       if (isVerified) {
         next();
@@ -64254,7 +64700,7 @@ var routes = [{
   children: [{
     path: "",
     component: _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
-    beforeEnter: vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default()([ifNotAuthenticated, adminOnly, verifiedEmail])
+    beforeEnter: vue_router_multiguard__WEBPACK_IMPORTED_MODULE_0___default()([ifAuthenticated, adminOnly, verifiedEmail])
   }]
 },
 /**
