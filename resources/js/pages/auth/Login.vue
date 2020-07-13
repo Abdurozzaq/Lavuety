@@ -96,7 +96,7 @@
         :timeout="5000"
         color="success"
       >
-        You has been logged in successfully.
+        You has been logged in successfully. Redirecting to Dashboard...
         <v-btn
           color="white"
           text
@@ -168,15 +168,8 @@
             localStorage.removeItem('userToken')
             currentObj.overlay = false
             if(error.response) {
-              if(error.response.data.code) {
-                currentObj.serverError = error.response.data.errors
-                currentObj.errorAlert = true
-                currentObj.$router.push('/UnverifiedEmail')
-              } else {
-                currentObj.serverError = error.response.data.errors
-                currentObj.errorAlert = true
-              }
-              
+              currentObj.serverError = error.response.data.errors
+              currentObj.errorAlert = true         
             }
           })
         })

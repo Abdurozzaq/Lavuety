@@ -31,8 +31,13 @@
                 </v-card-title>
 
                 <v-card-text class="headline font-weight-bold">
-                Now, Redirecting to your dashboard...
+                You've successfully verify your email. Thank You.
                 </v-card-text>
+
+                <v-card-actions>
+                  <v-btn @click="redirect">Redirect To Login Page</v-btn>
+                </v-card-actions>
+                
 
             </v-card>
           </v-col>
@@ -58,7 +63,6 @@
 
     mounted: function() {
         let currentObj = this
-        currentObj.redirect()
     }
 }
 

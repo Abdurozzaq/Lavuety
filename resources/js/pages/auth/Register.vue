@@ -119,7 +119,7 @@
         :timeout="5000"
         color="success"
       >
-        You has been registered successfully.
+        You has been registered successfully. Please check your email for verify your email.
         <v-btn
           color="white"
           text

@@ -33,7 +33,7 @@ class VerificationApiController extends Controller
         $user->email_verified_at = $date; // to enable the “email_verified_at field of that user be a current time stamp by mimicing the must verify email feature
         $user->save();
         
-        return \Redirect::to(config('frontend.verify_email_url'));
+        return \Redirect::to(config('frontend.verified_email_url'));
     }
 
 

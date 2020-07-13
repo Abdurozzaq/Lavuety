@@ -10,7 +10,6 @@ import Register from "./pages/auth/Register.vue"
 import ForgotPassword from "./pages/auth/ForgotPassword.vue"
 import ResetPassword from "./pages/auth/ResetPassword.vue"
 import ResendVerificationMail from "./pages/auth/ResendVerificationMail.vue"
-import UnverifiedEmail from "./pages/errorPages/UnverifiedEmail.vue"
 import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue"
 
 import Component from "./components/ExampleComponent.vue"
@@ -181,10 +180,6 @@ export const routes = [
         path: "/resend-verification-mail",
         component: ResendVerificationMail,
         beforeEnter: multiguard([ifNotAuthenticated]),
-    },
-    {
-        path: "/UnverifiedEmail",
-        component: UnverifiedEmail,
     },
     {
         path: "/verification-success",
