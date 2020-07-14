@@ -11,6 +11,8 @@ import ForgotPassword from "./pages/auth/ForgotPassword.vue"
 import ResetPassword from "./pages/auth/ResetPassword.vue"
 import ResendVerificationMail from "./pages/auth/ResendVerificationMail.vue"
 import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue"
+import LandingLayout from "./layouts/Landing.vue"
+import LandingPage from "./pages/LandingPage.vue"
 
 import Component from "./components/ExampleComponent.vue"
 
@@ -130,6 +132,17 @@ const verifiedEmail = (to, from, next) => {
 
 
 export const routes = [
+    {
+        path: "",
+        component: LandingLayout,
+        beforeEnter: multiguard([ifNotAuthenticated]),
+        children: [
+            {
+                path: "",
+                component: LandingPage,
+            }
+        ]
+    },
     {
         path: "/home",
         component: UserLayout,
