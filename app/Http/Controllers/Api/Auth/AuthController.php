@@ -13,46 +13,76 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function refreshToken() {
-        $user = Auth::user();
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'me', 'refresh']]);
+    }
 
-        if($user->hasRole('admin')) {
-            $abilities = [
-                'user:create',
-                'user:update',
-                'user:delete',
-                'user:index',
-            ];
-        } else {
-            $abilities = [
-                'user:perms'
-            ];
-        }
 
+
+
+
+    public function refresh() {
         return response()->json([
-            'status' => 'Success',
-            //LALU PADA METHOD createToken(), TAMBAHKAN PARAMETER ABILITIESNYA
-            'token' => $user->createToken($user->roles->pluck('name'), $abilities)->plainTextToken,
+            'status' => 'success',
+            'token' => auth()->refresh(true, true),
         ], 200);
     }
 
-    public function getUser(Request $request){
+
+
+
+
+    public function me() {
+
         return response()->json([
-            'status' => 'Success',
-            //LALU PADA METHOD createToken(), TAMBAHKAN PARAMETER ABILITIESNYA
+            'status' => 'success',
             'user' => Auth::user(),
             'role' => Auth::user()->roles->pluck('name'),
         ], 200);
     }
 
+
+
+
+
     public function logoutCurrentUser() {
-        Auth::user()->currentAccessToken()->delete();
+        auth()->logout();
 
         return response()->json([
-            'status' => 'Success',
+            'status' => 'success',
             'message' => 'Token Deleted / Logged Out'
         ], 200);
     }
+
+
+
+
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60
+        ]);
+    }
+
+
+
+
 
     public function login(Request $request)
     {
@@ -61,43 +91,19 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
-        if (!Hash::check($request->password, $user->password)) {
-            return response()->json(['status' => 'failed', 'errors' => [ 'password' => ['Your Password is Incorrect'] ] ], 500);
-        } else {
-            if($user->hasRole('admin')) {
-                $abilities = [
-                    'user:create',
-                    'user:update',
-                    'user:delete',
-                    'user:index',
-                ];
-            } else {
-                $abilities = [
-                    'user:perms'
-                ];
-            }
+        $credentials = request(['email', 'password']);
 
-            if($user->email_verified_at !== NULL){
-                return response()->json([
-                    'status' => 'Success',
-                    //LALU PADA METHOD createToken(), TAMBAHKAN PARAMETER ABILITIESNYA
-                    'token' => $user->createToken($user->roles->pluck('name'), $abilities)->plainTextToken,
-                    'role' => $user->roles->pluck('name'),
-                ], 200);
-            } else {
-                return response()->json([
-                    'status' => 'Failed',
-                    'code' => 'unverified-email',
-                    'errors'=> ['email' => ['Please Verify Email'] ],
-                ], 401);
-            }
-
-
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(["errors" => ['password' => ['Wrong Password'] ] ], 401);
         }
 
+        return $this->respondWithToken($token);
 
     }
+
+
+
+
 
     public function register(Request $request)
     {
@@ -113,7 +119,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'failed',
                 'errors' => $validator->errors()
-            ], 401);
+            ], 400);
         } else {
             $user = User::create([
                 'first_name' => $request->first_name,
@@ -125,10 +131,11 @@ class AuthController extends Controller
             $user->sendApiEmailVerificationNotification();
 
             return response()->json([
-                'status' => 'Success',
+                'status' => 'success',
                 'message' => 'Please confirm yourself by clicking on verify user button sent to you on your email'
             ], 200);
         }
+
     }
     
 }

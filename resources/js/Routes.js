@@ -13,8 +13,14 @@ import ResendVerificationMail from "./pages/auth/ResendVerificationMail.vue"
 import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue"
 import LandingLayout from "./layouts/Landing.vue"
 import LandingPage from "./pages/LandingPage.vue"
+import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue"
 
 import Component from "./components/ExampleComponent.vue"
+
+const token = localStorage.getItem('userToken')
+if (token) {
+  axios.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token
+}
 
 /**
  *
@@ -31,13 +37,19 @@ const ifAuthenticated = (to, from, next) => {
         next('/login')
     }
 }
-  
+
 const ifNotAuthenticated = (to, from, next) => {
-    if (!localStorage.getItem('userToken')) {
+
+    if (localStorage.hasOwnProperty('userToken') === false) {
         next()
     } else {
-        axios.get('/sanctum/csrf-cookie').then(response => {
-            axios.get('/api/get-user')
+
+            axios.get('api/auth/me', {
+                headers: {
+                  Authorization: 'Bearer ' + token,
+                  withCredentials: true //the token is a variable which holds the token
+                }
+               })
                 .then(function (response) {
                     // handle success
                     let userRole = response.data.role
@@ -52,20 +64,18 @@ const ifNotAuthenticated = (to, from, next) => {
                     // handle error
                     console.log(error);
                 })
-        });
     }
 }
 
 
 /**
- * Guard For 
- * Admin Only 
+ * Guard For
+ * Admin Only
  * &
- * User Only  
+ * User Only
  */
 const adminOnly = (to, from, next) => {
-    axios.get('/sanctum/csrf-cookie').then(response => {
-        axios.get('/api/get-user')
+        axios.get('api/auth/me')
             .then(function (response) {
                 // handle success
                 let userRole = response.data.role
@@ -81,12 +91,11 @@ const adminOnly = (to, from, next) => {
                 // handle error
                 console.log(error);
             })
-    });
 }
 
 const userOnly = (to, from, next) => {
-    axios.get('/sanctum/csrf-cookie').then(response => {
-        axios.get('/api/get-user')
+
+        axios.get('api/auth/me')
             .then(function (response) {
                 // handle success
                 let userRole = response.data.role
@@ -102,32 +111,59 @@ const userOnly = (to, from, next) => {
                 // handle error
                 console.log(error);
             })
-    });
 }
 
 /**
- * Guard For 
+ * Guard For
  * Verified User Email
  */
 const verifiedEmail = (to, from, next) => {
-    axios.get('/sanctum/csrf-cookie').then(response => {
-        axios.get('/api/get-user')
-            .then(function (response) {
-                // handle success
-                let isVerified = response.data.user.email_verified_at
-                if (isVerified) {
-                    next()
-                    return
-                } else {
-                    next('/UnverifiedEmail')
-                    return
-                }
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-    });
+
+    axios.get('api/auth/me')
+        .then(function (response) {
+            // handle success
+            let isVerified = response.data.user.email_verified_at
+            if (isVerified) {
+                next()
+                return
+            } else {
+                next('/UnverifiedEmail')
+                return
+            }
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+}
+
+/**
+* Guard For
+* Un Verified User Email
+*/
+const unVerifiedEmail = (to, from, next) => {
+
+axios.get('api/auth/me')
+    .then(function (response) {
+        // handle success
+        let isVerified = response.data.user.email_verified_at
+        if (isVerified == null) {
+            next('/UnverifiedEmail')
+            return
+        } else {
+            next()
+            return
+        }
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+}
+
+const pageTitle = (to, from, next) => {
+    document.title = to.meta.title
+    next()
 }
 
 
@@ -172,32 +208,56 @@ export const routes = [
     {
         path: "/login",
         component: Login,
+        meta: {
+            title: 'Login - OASHIER',
+        },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
     {
         path: "/register",
         component: Register,
+        meta: {
+            title: 'Register - OASHIER',
+        },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
     {
         path: "/forgot-password",
         component: ForgotPassword,
+        meta: {
+            title: 'Forgot Password - OASHIER',
+        },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
     {
         path: "/reset-password",
         component: ResetPassword,
+        meta: {
+            title: 'Reset Password - OASHIER',
+        },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
     {
         path: "/resend-verification-mail",
         component: ResendVerificationMail,
+        meta: {
+            title: 'Resend Verification Mail - OASHIER',
+        },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
     {
         path: "/verification-success",
         component: RedirectAfterVerify,
-        beforeEnter: multiguard([ifNotAuthenticated]),
+        meta: {
+            title: 'Verification Success - OASHIER',
+        },
+    },
+    {
+        path: "/UnverifiedEmail",
+        component: UnverifiedEmail,
+        meta: {
+            title: 'Unverified Email Address - OASHIER',
+        },
     }
 ];
 

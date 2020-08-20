@@ -13,18 +13,24 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('login', 'Api\Auth\AuthController@login');
-Route::post('register', 'Api\Auth\AuthController@register');
+Route::group([
 
-Route::get('email/verify/{id}', 'Api\Auth\VerificationApiController@verify')->name('verificationapi.verify');
-Route::post('email/resend', 'Api\Auth\VerificationApiController@resendVerificationmail')->name('verificationapi.resend');
+    'middleware' => 'api',
+    'prefix' => 'auth'
 
-Route::post('password/forgot', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail')->name('api.forgot-password');
-Route::post('password/reset', 'Api\Auth\ResetPasswordController@reset')->name('api.reset-password');
+], function ($router) {
 
-Route::group(['middleware' => 'auth:sanctum'], function() {
-    // For User Profile
-    Route::get('get-user', 'Api\Auth\AuthController@getUser');
-    Route::post('logout', 'Api\Auth\AuthController@logoutCurrentUser');
+    Route::post('login', 'Api\Auth\AuthController@login');
+    Route::post('register', 'Api\Auth\AuthController@register');
+    Route::get('email/verify/{id}', 'Api\Auth\VerificationApiController@verify')->name('verificationapi.verify');
+    Route::post('email/resend', 'Api\Auth\VerificationApiController@resendVerificationmail')->name('verificationapi.resend');
+    Route::post('password/forgot', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail')->name('api.forgot-password');
+    Route::post('password/reset', 'Api\Auth\ResetPasswordController@reset')->name('api.reset-password');
 
+    Route::post('logout', 'Api\Auth\AuthController@logoutCurrentUser')->middleware('jwt.verify');
+    Route::post('refresh', 'Api\Auth\AuthController@refresh');
+
+    Route::get('me', 'Api\Auth\AuthController@me')->middleware('jwt.verify');
+    
 });
+
