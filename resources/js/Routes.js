@@ -1,19 +1,19 @@
 import multiguard from 'vue-router-multiguard';
-import axios from 'axios'
+import axios from 'axios';
 
 import UserLayout from "./layouts/Dashboard-User.vue";
 import AdminLayout from "./layouts/Dashboard-Admin.vue";
 
 // For Auth
-import Login from "./pages/auth/Login.vue"
-import Register from "./pages/auth/Register.vue"
-import ForgotPassword from "./pages/auth/ForgotPassword.vue"
-import ResetPassword from "./pages/auth/ResetPassword.vue"
-import ResendVerificationMail from "./pages/auth/ResendVerificationMail.vue"
-import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue"
-import LandingLayout from "./layouts/Landing.vue"
-import LandingPage from "./pages/LandingPage.vue"
-import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue"
+import Login from "./pages/auth/Login.vue";
+import Register from "./pages/auth/Register.vue";
+import ForgotPassword from "./pages/auth/ForgotPassword.vue";
+import ResetPassword from "./pages/auth/ResetPassword.vue";
+import ResendVerificationMail from "./pages/auth/ResendVerificationMail.vue";
+import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue";
+import LandingLayout from "./layouts/Landing.vue";
+import LandingPage from "./pages/LandingPage.vue";
+import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue";
 
 import Component from "./components/ExampleComponent.vue"
 
