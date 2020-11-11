@@ -175,7 +175,7 @@ export const routes = [
         children: [
             {
                 path: "",
-                component: LandingPage,
+                component: Login,
             }
         ]
     },
