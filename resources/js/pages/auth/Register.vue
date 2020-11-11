@@ -106,6 +106,7 @@
 									</v-form>
 
 									<a class="text-subtitle1 white--text" href="/forgot-password">Fogot Password?</a>
+									<a class="text-subtitle1 white--text" href="/resend-verification-mail">Resend Verification Mail?</a>
 								</v-card-text>
 							</v-col>
 						</v-row>

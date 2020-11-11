@@ -22,6 +22,7 @@ if (token) {
   axios.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token
 }
 
+const app_name = process.env.MIX_APP_NAME;
 /**
  *
  * For Authenticated
@@ -176,7 +177,7 @@ export const routes = [
 						path: "",
 						component: Login,
 						meta: {
-								title: 'Welcome - Lavuety',
+								title: `Welcome - ${app_name}`,
 						},
 						beforeEnter: multiguard([pageTitle, ifNotAuthenticated]),
 					},
@@ -184,7 +185,7 @@ export const routes = [
 						path: "/register",
 						component: Register,
 						meta: {
-								title: 'Register - Lavuety',
+								title: `Register - ${app_name}`,
 						},
 						beforeEnter: multiguard([pageTitle, ifNotAuthenticated]),
 					}
@@ -198,7 +199,7 @@ export const routes = [
                 path: "",
                 component: Component,
 								meta: {
-										title: 'Admin Dashboard - Lavuety',
+										title: `Admin Dashboard - ${app_name}`,
 								},
                 beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
             }
@@ -212,7 +213,7 @@ export const routes = [
                 path: "",
                 component: Component,
 								meta: {
-										title: 'Admin Dashboard - Lavuety',
+										title: `Admin Dashboard - ${app_name}`,
 								},
                 beforeEnter: multiguard([pageTitle, ifAuthenticated, adminOnly, verifiedEmail]),
             },
@@ -227,7 +228,7 @@ export const routes = [
         path: "/forgot-password",
         component: ForgotPassword,
         meta: {
-            title: 'Forgot Password - Lavuety',
+            title: `Forgot Password - ${app_name}`,
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -235,7 +236,7 @@ export const routes = [
         path: "/reset-password",
         component: ResetPassword,
         meta: {
-            title: 'Reset Password - Lavuety',
+            title: `Reset Password - ${app_name}`,
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -243,7 +244,7 @@ export const routes = [
         path: "/resend-verification-mail",
         component: ResendVerificationMail,
         meta: {
-            title: 'Resend Verification Mail - Lavuety',
+            title: `Resend Verification Mail - ${app_name}`,
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -251,14 +252,14 @@ export const routes = [
         path: "/verification-success",
         component: RedirectAfterVerify,
         meta: {
-            title: 'Verification Success - Lavuety',
+            title: `Verification Success - ${app_name}`,
         },
     },
     {
         path: "/UnverifiedEmail",
         component: UnverifiedEmail,
         meta: {
-            title: 'Unverified Email Address - Lavuety',
+            title: `Unverified Email Address - ${app_name}`,
         },
     }
 ];
