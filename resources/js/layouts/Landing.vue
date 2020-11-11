@@ -3,6 +3,7 @@
     <v-app-bar
       app
       dark
+      color="deep-purple"
     >
       <v-toolbar-title
         style="width: 300px"

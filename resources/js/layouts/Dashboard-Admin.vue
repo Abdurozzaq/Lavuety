@@ -160,7 +160,7 @@
               </v-list-item>
             </v-list-item-group>
           </v-list>
-                 
+
 
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -226,19 +226,17 @@
     }), // end of data
 
     methods: {
-      logout: function() {
-        let currentObj = this
-        axios.get('/sanctum/csrf-cookie').then(response => {
-          axios.post('/api/logout')
-          .then(function (response) {
-            localStorage.removeItem('userToken')
-            currentObj.$router.push('/login')
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        });
-      }
+        logout: function() {
+            let currentObj = this
+            axios.post('/api/auth/logout')
+                .then(function (response) {
+                    localStorage.removeItem('userToken')
+                    currentObj.$router.push('/login')
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
   }
 </script>
