@@ -233,7 +233,7 @@
             axios.post('/api/auth/logout')
                 .then(function (response) {
                     localStorage.removeItem('userToken')
-                    currentObj.$router.push('/login')
+                    currentObj.$router.push('/')
                 })
                 .catch(function (error) {
                     console.log(error);

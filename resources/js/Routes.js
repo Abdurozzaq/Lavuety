@@ -34,7 +34,7 @@ const ifAuthenticated = (to, from, next) => {
         next()
         return
     } else {
-        next('/login')
+        next('/')
     }
 }
 
@@ -83,7 +83,7 @@ const adminOnly = (to, from, next) => {
                     next()
                     return
                 } else {
-                    next('/login')
+                    next('/')
                     return
                 }
             })
@@ -103,7 +103,7 @@ const userOnly = (to, from, next) => {
                     next()
                     return
                 } else {
-                    next('/login')
+                    next('/')
                     return
                 }
             })
@@ -172,14 +172,22 @@ export const routes = [
         path: "",
         component: LandingLayout,
         children: [
-            {
-                path: "",
-                component: Login,
-								meta: {
-										title: 'Welcome - Lavuety',
-								},
-								beforeEnter: multiguard([pageTitle, ifNotAuthenticated]),
-            }
+					{
+						path: "",
+						component: Login,
+						meta: {
+								title: 'Welcome - Lavuety',
+						},
+						beforeEnter: multiguard([pageTitle, ifNotAuthenticated]),
+					},
+					{
+						path: "/register",
+						component: Register,
+						meta: {
+								title: 'Register - Lavuety',
+						},
+						beforeEnter: multiguard([pageTitle, ifNotAuthenticated]),
+					}
         ]
     },
     {
@@ -189,7 +197,10 @@ export const routes = [
             {
                 path: "",
                 component: Component,
-                beforeEnter: multiguard([ifAuthenticated, userOnly, verifiedEmail]),
+								meta: {
+										title: 'Admin Dashboard - Lavuety',
+								},
+                beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
             }
         ]
     },
@@ -200,7 +211,10 @@ export const routes = [
             {
                 path: "",
                 component: Component,
-                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail]),
+								meta: {
+										title: 'Admin Dashboard - Lavuety',
+								},
+                beforeEnter: multiguard([pageTitle, ifAuthenticated, adminOnly, verifiedEmail]),
             },
         ]
     },
@@ -208,15 +222,7 @@ export const routes = [
     /**
      * For Authentication Purposes
      */
-		// Login Route is In Landing Page
-    {
-        path: "/register",
-        component: Register,
-        meta: {
-            title: 'Register - Lavuety',
-        },
-        beforeEnter: multiguard([ifNotAuthenticated]),
-    },
+		// Login, Register Routes is In Landing Page
     {
         path: "/forgot-password",
         component: ForgotPassword,

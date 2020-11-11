@@ -1,122 +1,120 @@
 <template>
-  <v-app>
-		<v-content class="pt-0">
-			<v-container
-				fluid
-				class="fill-height py-0"
+	<v-content class="pt-0">
+		<v-container
+			fluid
+			class="fill-height py-0"
+		>
+			<v-row
+				align="center"
+				justify="center"
 			>
-				<v-row
-					align="center"
-					justify="center"
+				<v-col
+					cols="12"
+					sm="12"
+					md="7"
+					lg="7"
 				>
-					<v-col
-						cols="12"
-						sm="12"
-						md="7"
-						lg="7"
+					<v-img
+						src="/statics/login.png"
+						max-width="400"
+						class="mx-auto"
 					>
-						<v-img
-							src="/statics/login.png"
-							max-width="400"
-							class="mx-auto"
-						>
-						</v-img>
-					</v-col>
+					</v-img>
+				</v-col>
 
-					<v-col
-						cols="12"
-						sm="12"
-						md="5"
-						lg="5"
-						class="pa-0"
+				<v-col
+					cols="12"
+					sm="12"
+					md="5"
+					lg="5"
+					class="pa-0"
+				>
+					<v-card
+						height="110vh"
+						dark
+						class="deep-purple d-flex align-center"
+						rounded="0"
 					>
-						<v-card
-							height="100vh"
-							dark
-							class="deep-purple d-flex align-center"
-							rounded="0"
+
+						<v-row>
+							<v-col>
+								<v-card-text class="text-center">
+									<div class="text-h6">Welcome!</div>
+									<div class="text-subtitle1 pb-3">Sign in to your account</div>
+								</v-card-text>
+
+								<v-card-text v-if="serverError" class="py-0">
+									<error-alert class="mx-5" v-if="serverError" :serverError="serverError"/>
+								</v-card-text>
+
+								<v-card-text class="text-center">
+									<v-form v-on:submit.prevent="login">
+										<v-text-field
+											label="Email"
+											filled
+											dense
+											class="mx-5"
+											v-model="email"
+											type="email"
+										></v-text-field>
+
+										<v-text-field
+											label="Password"
+											filled
+											dense
+											class="mx-5"
+											v-model="password"
+											type="password"
+										></v-text-field>
+
+										<v-btn
+											rounded
+											color="white"
+											width="300px"
+											class="mb-3"
+											type="submit"
+										>
+											<div class="font-weight-bold deep-purple--text">Sign In</div>
+										</v-btn>
+									</v-form>
+
+									<a class="text-subtitle1 white--text" href="/forgot-password">Fogot Password?</a>
+								</v-card-text>
+							</v-col>
+						</v-row>
+
+						<!-- Loading -->
+						<v-overlay
+							:absolute="true"
+							:value="overlay"
 						>
+							<v-progress-circular
+								:size="50"
+								color="white"
+								indeterminate
+							></v-progress-circular>
+						</v-overlay>
+					</v-card>
+				</v-col>
+			</v-row>
+		</v-container>
 
-							<v-row>
-								<v-col>
-									<v-card-text class="text-center">
-										<div class="text-h6">Welcome!</div>
-										<div class="text-subtitle1 pb-3">Sign in to your account</div>
-									</v-card-text>
-
-									<v-card-text v-if="serverError" class="py-0">
-										<error-alert class="mx-5" v-if="serverError" :serverError="serverError"/>
-									</v-card-text>
-
-									<v-card-text class="text-center">
-										<v-form v-on:submit.prevent="login">
-											<v-text-field
-												label="Email"
-												filled
-												dense
-												class="mx-5"
-												v-model="email"
-												type="email"
-											></v-text-field>
-
-											<v-text-field
-												label="Password"
-												filled
-												dense
-												class="mx-5"
-												v-model="password"
-												type="password"
-											></v-text-field>
-
-											<v-btn
-												rounded
-												color="white"
-												width="300px"
-												class="mb-3"
-												type="submit"
-											>
-												<div class="font-weight-bold deep-purple--text">Sign In</div>
-											</v-btn>
-										</v-form>
-
-										<a class="text-subtitle1 white--text" href="/forgot-password">Fogot Password?</a>
-									</v-card-text>
-								</v-col>
-							</v-row>
-
-							<!-- Loading -->
-							<v-overlay
-								:absolute="true"
-								:value="overlay"
-							>
-								<v-progress-circular
-									:size="50"
-									color="white"
-									indeterminate
-								></v-progress-circular>
-							</v-overlay>
-						</v-card>
-					</v-col>
-				</v-row>
-			</v-container>
-
-			<v-snackbar
-				v-model="snackbar"
-				:timeout="5000"
-				:color="snackbarColor"
+		<v-snackbar
+			v-model="snackbar"
+			:timeout="5000"
+			:color="snackbarColor"
+		>
+			{{ snackbarText }}
+			<v-btn
+				color="white"
+				text
+				@click="snackbar = false"
 			>
-				{{ snackbarText }}
-				<v-btn
-					color="white"
-					text
-					@click="snackbar = false"
-				>
-					Close
-				</v-btn>
-			</v-snackbar>
+				Close
+			</v-btn>
+		</v-snackbar>
 
-		</v-content>
-  </v-app>
+	</v-content>
 </template>
 
 
@@ -193,7 +191,6 @@
 				if(error.response) {
 					currentObj.serverError = error.response.data.errors
 					currentObj.password = ""
-					currentObj.errorAlert = true
 				}
 			})
 		}, // end of login method
