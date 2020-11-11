@@ -83,21 +83,33 @@
 									</v-card-text>
 								</v-col>
 							</v-row>
+
+							<!-- Loading -->
+							<v-overlay
+								:absolute="true"
+								:value="overlay"
+							>
+								<v-progress-circular
+									:size="50"
+									color="white"
+									indeterminate
+								></v-progress-circular>
+							</v-overlay>
 						</v-card>
 					</v-col>
 				</v-row>
 			</v-container>
 
 			<v-snackbar
-				v-model="successSnackbar"
+				v-model="snackbar"
 				:timeout="5000"
-				color="success"
+				:color="snackbarColor"
 			>
-				You has been logged in successfully. Redirecting to Dashboard...
+				{{ snackbarText }}
 				<v-btn
 					color="white"
 					text
-					@click="successSnackbar = false"
+					@click="snackbar = false"
 				>
 					Close
 				</v-btn>
@@ -118,20 +130,20 @@
 
 		data() {
 			return {
-				email: null,
-				password: null,
-				serverError: null,
-				errorAlert: false,
-				successSnackbar: false,
+				email: "",
+				password: "",
+				serverError: "",
+				snackbar: false,
+				snackbarColor: "",
+				snackbarText: "",
 				overlay: false,
-				serverErrorCode: null,
 			}
 		},
 
 		methods: {
 			login: function() {
-			let currentObj = this
-			currentObj.errorAlert = false
+			let currentObj = this	
+			currentObj.serverError = ""
 			currentObj.overlay = true
 
 			axios.post('api/auth/login', {
@@ -149,7 +161,9 @@
 				}
 
 				// after success show successSnackbar
-				currentObj.successSnackbar = true
+				currentObj.snackbar = true
+				currentObj.snackbarColor = 'success'
+				currentObj.snackbarText = "Sign In Successed, now redirecting to your dashboard..."
 				currentObj.overlay = false
 
 				// after all success redirect to home
@@ -178,6 +192,7 @@
 				currentObj.overlay = false
 				if(error.response) {
 					currentObj.serverError = error.response.data.errors
+					currentObj.password = ""
 					currentObj.errorAlert = true
 				}
 			})

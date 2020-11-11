@@ -171,11 +171,14 @@ export const routes = [
     {
         path: "",
         component: LandingLayout,
-        beforeEnter: multiguard([ifNotAuthenticated]),
         children: [
             {
                 path: "",
                 component: Login,
+								meta: {
+										title: 'Welcome - Lavuety',
+								},
+								beforeEnter: multiguard([pageTitle, ifNotAuthenticated]),
             }
         ]
     },
@@ -205,19 +208,12 @@ export const routes = [
     /**
      * For Authentication Purposes
      */
-    {
-        path: "/login",
-        component: Login,
-        meta: {
-            title: 'Login - OASHIER',
-        },
-        beforeEnter: multiguard([ifNotAuthenticated]),
-    },
+		// Login Route is In Landing Page
     {
         path: "/register",
         component: Register,
         meta: {
-            title: 'Register - OASHIER',
+            title: 'Register - Lavuety',
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -225,7 +221,7 @@ export const routes = [
         path: "/forgot-password",
         component: ForgotPassword,
         meta: {
-            title: 'Forgot Password - OASHIER',
+            title: 'Forgot Password - Lavuety',
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -233,7 +229,7 @@ export const routes = [
         path: "/reset-password",
         component: ResetPassword,
         meta: {
-            title: 'Reset Password - OASHIER',
+            title: 'Reset Password - Lavuety',
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -241,7 +237,7 @@ export const routes = [
         path: "/resend-verification-mail",
         component: ResendVerificationMail,
         meta: {
-            title: 'Resend Verification Mail - OASHIER',
+            title: 'Resend Verification Mail - Lavuety',
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -249,14 +245,14 @@ export const routes = [
         path: "/verification-success",
         component: RedirectAfterVerify,
         meta: {
-            title: 'Verification Success - OASHIER',
+            title: 'Verification Success - Lavuety',
         },
     },
     {
         path: "/UnverifiedEmail",
         component: UnverifiedEmail,
         meta: {
-            title: 'Unverified Email Address - OASHIER',
+            title: 'Unverified Email Address - Lavuety',
         },
     }
 ];
