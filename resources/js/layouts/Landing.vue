@@ -12,7 +12,7 @@
             style="width: 150px"
             class="ml-0 pl-4"
         >
-            <span>OZZAQDEV</span>
+            <span>{{ app_name }}</span>
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -82,7 +82,8 @@
 						title: "Register",
 						link: "/register"
 					}
-				]
+				],
+				app_name: process.env.MIX_APP_NAME
       }
     }
   }
