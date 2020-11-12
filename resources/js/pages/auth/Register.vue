@@ -182,7 +182,13 @@
             password_confirmation: currentObj.password_confirmation
           })
           .then(function (response) {
-          
+
+						currentObj.first_name = ""
+						currentObj.last_name = ""
+						currentObj.email = ""
+						currentObj.password = ""
+						currentObj.password_confirmation = ""
+
             // after success show successSnackbar
             currentObj.snackbar = true
 						currentObj.snackbarColor = 'success'

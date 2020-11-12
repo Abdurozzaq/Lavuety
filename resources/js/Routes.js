@@ -141,29 +141,6 @@ const verifiedEmail = (to, from, next) => {
         })
 }
 
-/**
-* Guard For
-* Un Verified User Email
-*/
-const unVerifiedEmail = (to, from, next) => {
-
-axios.get('api/auth/me')
-    .then(function (response) {
-        // handle success
-        let isVerified = response.data.user.email_verified_at
-        if (isVerified == null) {
-            next('/UnverifiedEmail')
-            return
-        } else {
-            next()
-            return
-        }
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-}
 
 const pageTitle = (to, from, next) => {
     document.title = to.meta.title
@@ -260,11 +237,11 @@ export const routes = [
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
     {
-        path: "/verification-success",
-        component: RedirectAfterVerify,
-        meta: {
-            title: `Verification Success - ${app_name}`,
-        },
+			path: "/verification-success",
+			component: RedirectAfterVerify,
+			meta: {
+					title: `Verification Success - ${app_name}`,
+			},
     },
     {
         path: "/UnverifiedEmail",

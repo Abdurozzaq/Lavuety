@@ -5,7 +5,7 @@
         class="fill-height"
         fluid
       >
-        <v-row
+      	<v-row
           align="center"
           justify="center"
         >
@@ -13,55 +13,43 @@
             cols="12"
             sm="8"
             md="4"
+						lg="4"
+						class="text-center"
           >
-            <v-card class="elevation-12">
-              <v-toolbar
-                color="grey darken-4"
-                dark
-                flat
-              >
-                <v-toolbar-title>Unverified Email Address!</v-toolbar-title>
-              </v-toolbar>
-              <v-card-text>
-                <v-avatar
-                    class="d-block mx-auto"
-                    size="200"
-                    tile
-                >
-                    <v-img src="/statics/email-error-icon.png"></v-img>
-                </v-avatar>
-                <br>
-                <div class="text-center">Please, Verifiy Your Email Before Continuing Using This App...</div>
-              </v-card-text>
-              <v-toolbar
-                color="grey darken-4"
-                dark
-                flat
-              >
-                <v-btn href="/resend-verification-mail" outlined class="mr-2" color="white">Resend Verification Mail?</v-btn>
-              </v-toolbar>
-              <v-toolbar
-                color="grey darken-4"
-                dark
-                flat
-              >
-                <v-btn @click.prevent="logout()" outlined class="mr-2" color="white">Logout / Change Account</v-btn>
-              </v-toolbar>
-            </v-card>
+            <v-img
+							class="mb-4"
+							src="/statics/403.png"
+						></v-img>
+
+						<br>
+
+						<div>Stop! Please verify your email first...</div>
+
+						<br>
+
+						<v-btn
+							rounded
+							color="deep-purple"
+							dark
+							@click.prevent="redirectToResendMail"
+							class="mx-auto"
+						>
+							Resend Verification Mail?
+						</v-btn>
           </v-col>
         </v-row>
       </v-container>
 
       <v-snackbar
-        v-model="successSnackbar"
+        v-model="snackbar"
         :timeout="5000"
-        color="success"
+        :color="snackbarColor"
       >
-        Redirecting to Resend Verification Email...
+        {{ snackbarText }}
         <v-btn
           color="white"
           text
-          @click="successSnackbar = false"
+          @click="snackbar = false"
         >
           Close
         </v-btn>
@@ -74,28 +62,24 @@
 <script>
   import axios from 'axios'
   export default {
-    props: {
-      source: String,
-    },
-
     data() {
       return {
-        successSnackbar: false,
+        snackbar: false,
+				snackbarColor: "",
+				snackbarText: "",
       }
     },
 
     methods: {
-      logout: function() {
-        let currentObj = this
-          axios.post('/api/auth/logout')
-          .then(function (response) {
-            localStorage.removeItem('userToken')
-            currentObj.$router.push('/login')
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      },
+			redirectToResendMail: function() {
+				let currentObj = this
+
+				currentObj.snackbar = true
+				currentObj.snackbarColor = "success"
+				currentObj.snackbarText = "Redirecting to resend verification mail page..."
+
+				currentObj.$router.push('/resend-verification-mail')
+			}
     } // end of methods
   }
 </script>
