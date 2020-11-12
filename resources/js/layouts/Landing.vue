@@ -18,7 +18,7 @@
         <v-spacer></v-spacer>
 
 				<div v-if="$vuetify.breakpoint.mdAndUp">
-					<v-btn href="/login" class="white--text mr-2" outlined rounded>
+					<v-btn href="/" class="white--text mr-2" outlined rounded>
             LOGIN
 					</v-btn>
 					<v-btn href="/register" class="white--text" outlined rounded>
