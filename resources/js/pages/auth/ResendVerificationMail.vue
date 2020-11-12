@@ -15,7 +15,7 @@
 					lg="7"
 				>
 					<v-img
-						src="/statics/activaiton.png"
+						src="/statics/activation.png"
 						max-width="400"
 						class="mx-auto"
 					>
