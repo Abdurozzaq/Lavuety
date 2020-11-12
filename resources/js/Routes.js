@@ -15,6 +15,9 @@ import LandingLayout from "./layouts/Landing.vue";
 import LandingPage from "./pages/LandingPage.vue";
 import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue";
 
+// For Error Pages
+import Error404 from './pages/error/404.vue'
+
 import Component from "./components/ExampleComponent.vue"
 
 const token = localStorage.getItem('userToken')
@@ -261,7 +264,19 @@ export const routes = [
         meta: {
             title: `Unverified Email Address - ${app_name}`,
         },
-    }
+    },
+
+		/**
+		 * Error Page Routes
+		 */
+		{
+			path: "*",
+			component: Error404,
+			meta: {
+					title: `404  Not Found - ${app_name}`,
+			},
+			beforeEnter: multiguard([pageTitle]),
+		},
 ];
 
 
