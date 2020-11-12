@@ -31,6 +31,8 @@
 							rounded
 							color="deep-purple"
 							dark
+							:loading="redirecting"
+      				:disabled="redirecting"
 							@click.prevent="redirectToResendMail"
 							class="mx-auto"
 						>
@@ -67,6 +69,7 @@
         snackbar: false,
 				snackbarColor: "",
 				snackbarText: "",
+				redirecting: false
       }
     },
 
@@ -74,11 +77,22 @@
 			redirectToResendMail: function() {
 				let currentObj = this
 
+				currentObj.redirecting = true
+
 				currentObj.snackbar = true
 				currentObj.snackbarColor = "success"
 				currentObj.snackbarText = "Redirecting to resend verification mail page..."
 
-				currentObj.$router.push('/resend-verification-mail')
+				axios.post('/api/auth/logout')
+					.then(function (response) {
+						localStorage.removeItem('userToken')
+						currentObj.$router.push('/resend-verification-mail')
+					})
+					.catch(function (error) {
+							console.log(error);
+					});
+
+				currentObj.redirecting = false
 			}
     } // end of methods
   }

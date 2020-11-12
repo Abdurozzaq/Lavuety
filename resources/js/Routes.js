@@ -141,6 +141,28 @@ const verifiedEmail = (to, from, next) => {
         })
 }
 
+/**
+* Guard For
+* UnVerified User Email
+*/
+const unVerifiedEmailOnly = (to, from, next) => {
+	axios.get('api/auth/me')
+		.then(function (response) {
+				// handle success
+				let isVerified = response.data.user.email_verified_at
+				if (isVerified == null) {
+						next()
+						return
+				} else {
+						next('/')
+						return
+				}
+		})
+		.catch(function (error) {
+				// handle error
+				console.log(error);
+		})
+}
 
 const pageTitle = (to, from, next) => {
     document.title = to.meta.title
@@ -244,11 +266,12 @@ export const routes = [
 			},
     },
     {
-        path: "/UnverifiedEmail",
-        component: UnverifiedEmail,
-        meta: {
-            title: `Unverified Email Address - ${app_name}`,
-        },
+			path: "/UnverifiedEmail",
+			component: UnverifiedEmail,
+			meta: {
+					title: `Unverified Email Address - ${app_name}`,
+			},
+			beforeEnter: multiguard([ifAuthenticated, unVerifiedEmailOnly]),
     },
 
 		/**
