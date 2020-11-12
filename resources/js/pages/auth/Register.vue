@@ -101,7 +101,7 @@
 											class="mb-3"
 											type="submit"
 										>
-											<div class="font-weight-bold deep-purple--text">Sign In</div>
+											<div class="font-weight-bold deep-purple--text">Register</div>
 										</v-btn>
 									</v-form>
 

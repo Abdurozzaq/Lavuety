@@ -191,7 +191,15 @@ export const routes = [
 								title: `Register - ${app_name}`,
 						},
 						beforeEnter: multiguard([pageTitle, ifNotAuthenticated]),
-					}
+					},
+					{
+						path: "/resend-verification-mail",
+						component: ResendVerificationMail,
+						meta: {
+								title: `Resend Verification Mail - ${app_name}`,
+						},
+						beforeEnter: multiguard([ifNotAuthenticated]),
+					},
         ]
     },
     {
@@ -240,14 +248,6 @@ export const routes = [
         component: ResetPassword,
         meta: {
             title: `Reset Password - ${app_name}`,
-        },
-        beforeEnter: multiguard([ifNotAuthenticated]),
-    },
-    {
-        path: "/resend-verification-mail",
-        component: ResendVerificationMail,
-        meta: {
-            title: `Resend Verification Mail - ${app_name}`,
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
