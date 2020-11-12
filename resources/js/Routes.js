@@ -200,6 +200,14 @@ export const routes = [
 						},
 						beforeEnter: multiguard([ifNotAuthenticated]),
 					},
+					{
+						path: "/forgot-password",
+						component: ForgotPassword,
+						meta: {
+								title: `Forgot Password - ${app_name}`,
+						},
+						beforeEnter: multiguard([ifNotAuthenticated]),
+					},
         ]
     },
     {
