@@ -130,7 +130,7 @@
     methods: {
       resend: function() {
         let currentObj = this
-        currentObj.errorAlert = false
+        currentObj.serverError = ""
         currentObj.overlay = true
           axios.post('/api/auth/email/resend', {
             email: currentObj.email,
@@ -147,7 +147,6 @@
             currentObj.overlay = false
             if(error.response) {
               currentObj.serverError = error.response.data.errors
-              currentObj.errorAlert = true
             }
           })
       } // end of login method

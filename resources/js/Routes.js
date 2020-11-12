@@ -207,6 +207,14 @@ export const routes = [
 						},
 						beforeEnter: multiguard([ifNotAuthenticated]),
 					},
+					{
+						path: "/reset-password",
+						component: ResetPassword,
+						meta: {
+								title: `Reset Password - ${app_name}`,
+						},
+						beforeEnter: multiguard([ifNotAuthenticated]),
+					},
         ]
     },
     {
@@ -241,23 +249,7 @@ export const routes = [
     /**
      * For Authentication Purposes
      */
-		// Login, Register Routes is In Landing Page
-    {
-        path: "/forgot-password",
-        component: ForgotPassword,
-        meta: {
-            title: `Forgot Password - ${app_name}`,
-        },
-        beforeEnter: multiguard([ifNotAuthenticated]),
-    },
-    {
-        path: "/reset-password",
-        component: ResetPassword,
-        meta: {
-            title: `Reset Password - ${app_name}`,
-        },
-        beforeEnter: multiguard([ifNotAuthenticated]),
-    },
+		// Login, Register, Forgot Password, & Reset Password Routes are the children of Landing Layout
     {
 			path: "/verification-success",
 			component: RedirectAfterVerify,

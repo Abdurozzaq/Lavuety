@@ -130,7 +130,7 @@
     methods: {
       forgotPass: function() {
         let currentObj = this
-        currentObj.errorAlert = false
+        currentObj.serverError = ""
         currentObj.overlay = true
         
           axios.post('/api/auth/password/forgot', {
@@ -149,7 +149,6 @@
             currentObj.overlay = false
             if(error.response) {
               currentObj.serverError = error.response.data.errors
-              currentObj.errorAlert = true
             }
           })
       } // end of forgot password method
