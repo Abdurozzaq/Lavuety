@@ -12,9 +12,11 @@ import VueRouter from 'vue-router';
 import { routes } from './Routes';
 
 // For AXIOS DEFAULT HEADERS
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = true
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true;
 axios.defaults.baseURL = process.env.MIX_APP_URL;
 
 const token = localStorage.getItem('userToken')
