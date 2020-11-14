@@ -14,7 +14,7 @@ User & Admin
 
 Create a Database Table in phpMyAdmin
 
-Extract the Laravel Source Code that has been downloaded to a folder anywhere.
+Extract the Lavuety Source Code that has been downloaded to a folder anywhere.
 
 Open Code Editor → Terminal.
 
