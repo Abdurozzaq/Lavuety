@@ -34,7 +34,7 @@
               item
             >
               <v-img
-                src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
+                src="/statics/user.png"
                 alt="Vuetify"
               ></v-img></v-avatar>
           </v-btn>
@@ -44,7 +44,7 @@
           <v-list>
             <v-list-item>
               <v-list-item-avatar>
-                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+                <img src="/statics/user.png" alt="user">
               </v-list-item-avatar>
 
               <v-list-item-content>
