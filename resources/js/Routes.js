@@ -48,26 +48,26 @@ const ifNotAuthenticated = (to, from, next) => {
         next()
     } else {
 
-            axios.get('api/auth/me', {
-                headers: {
-                  Authorization: 'Bearer ' + token,
-                  withCredentials: true //the token is a variable which holds the token
-                }
-               })
-                .then(function (response) {
-                    // handle success
-                    let userRole = response.data.role
-                    if (userRole == "admin") {
-                        next('/siAdmino')
-                        return
-                    } else {
-                        next('/home')
-                    }
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
-                })
+			axios.get('api/auth/me', {
+				headers: {
+					Authorization: 'Bearer ' + token,
+					withCredentials: true //the token is a variable which holds the token
+				}
+				})
+				.then(function (response) {
+						// handle success
+						let userRole = response.data.role
+						if (userRole == "admin") {
+								next('/siAdmino')
+								return
+						} else {
+								next('/home')
+						}
+				})
+				.catch(function (error) {
+						// handle error
+						console.log(error);
+				})
     }
 }
 
