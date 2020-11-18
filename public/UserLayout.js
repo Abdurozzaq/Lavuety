@@ -143,7 +143,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -264,11 +263,7 @@ var render = function() {
           _c(
             "v-menu",
             {
-              attrs: {
-                "close-on-content-click": false,
-                "nudge-width": 200,
-                "offset-x": ""
-              },
+              attrs: { "close-on-content-click": false, "offset-x": "" },
               scopedSlots: _vm._u([
                 {
                   key: "activator",
@@ -311,6 +306,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-card",
+                { attrs: { "max-width": "300" } },
                 [
                   _c(
                     "v-list",
@@ -327,13 +323,17 @@ var render = function() {
                           _c(
                             "v-list-item-content",
                             [
-                              _c("v-list-item-title", [
-                                _vm._v(
-                                  _vm._s(_vm.me.first_name) +
-                                    " " +
-                                    _vm._s(_vm.me.last_name)
-                                )
-                              ]),
+                              _c(
+                                "v-list-item-title",
+                                { staticClass: "text-truncate" },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.me.first_name) +
+                                      " " +
+                                      _vm._s(_vm.me.last_name)
+                                  )
+                                ]
+                              ),
                               _vm._v(" "),
                               _c("v-list-item-subtitle", [
                                 _vm._v(_vm._s(_vm.me.email))

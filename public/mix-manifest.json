@@ -1,7 +1,7 @@
 {
     "/js/app.js": "/js/app.js?id=8e55420a3b2b46e1707b",
     "/AdminHome.js": "/AdminHome.js?id=24bf2770047b18b39db4",
-    "/AdminLayout.js": "/AdminLayout.js?id=e8c39efbae7958d5f467",
+    "/AdminLayout.js": "/AdminLayout.js?id=2c05bd6c53b8da9e66a9",
     "/Error404Page.js": "/Error404Page.js?id=09f02fc953d8b253a689",
     "/ForgotPassword.js": "/ForgotPassword.js?id=ff46e9e3f745d02d7e22",
     "/LandingLayout.js": "/LandingLayout.js?id=0a5160a424b5afd639f8",
@@ -11,7 +11,7 @@
     "/ResetPassword.js": "/ResetPassword.js?id=7bfbf69607774d3cd195",
     "/UnverifiedEmail.js": "/UnverifiedEmail.js?id=a3047a884ea54d8299ee",
     "/UserHome.js": "/UserHome.js?id=e56d9e4c84873b2c08a0",
-    "/UserLayout.js": "/UserLayout.js?id=b5b3d4afa2cc8c44b70d",
+    "/UserLayout.js": "/UserLayout.js?id=3a0677e376be51acc78d",
     "/UserProfileSettings.js": "/UserProfileSettings.js?id=f99cc8965d5bf95446d1",
     "/UserSettings.js": "/UserSettings.js?id=5493277fe6eb4e9eecdc",
     "/VerificationSuccess.js": "/VerificationSuccess.js?id=859913eea22ec2267d46",

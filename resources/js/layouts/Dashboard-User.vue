@@ -20,7 +20,6 @@
       <v-menu
         v-model="menu"
         :close-on-content-click="false"
-        :nudge-width="200"
         offset-x
       >
         <template v-slot:activator="{ on }">
@@ -40,7 +39,7 @@
           </v-btn>
         </template>
 
-        <v-card>
+        <v-card max-width="300">
           <v-list>
             <v-list-item>
               <v-list-item-avatar>
@@ -48,7 +47,7 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>{{ me.first_name }} {{ me.last_name }}</v-list-item-title>
+                <v-list-item-title class="text-truncate">{{ me.first_name }} {{ me.last_name }}</v-list-item-title>
                 <v-list-item-subtitle>{{ me.email }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
