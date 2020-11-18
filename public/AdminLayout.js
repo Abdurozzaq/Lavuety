@@ -161,7 +161,7 @@ __webpack_require__.r(__webpack_exports__);
       sidebarItems: [{
         title: 'Home',
         icon: 'mdi-view-dashboard',
-        url: '/home'
+        url: '/siAdmino'
       }],
       appName: "Lavuety",
       me: {

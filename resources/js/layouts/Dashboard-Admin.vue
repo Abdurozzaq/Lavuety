@@ -143,7 +143,7 @@
       ],
 
 			sidebarItems: [
-        { title: 'Home', icon: 'mdi-view-dashboard', url: '/home' },
+        { title: 'Home', icon: 'mdi-view-dashboard', url: '/siAdmino' },
       ],
 
 			appName: process.env.MIX_APP_NAME,
