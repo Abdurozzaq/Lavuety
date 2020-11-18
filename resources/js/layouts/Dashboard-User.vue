@@ -56,8 +56,8 @@
           <v-divider></v-divider>
 
           <v-list shaped dense>
-            <v-subheader>REPORTS</v-subheader>
-            <v-list-item-group v-model="dropdownItem" color="primary">
+            <v-subheader>NAVIGATION</v-subheader>
+            <v-list-item-group color="primary">
               <v-list-item
                 v-for="(ip, i) in dropdownItems"
                 :key="i"
@@ -137,7 +137,6 @@
       menu: false,
       drawer: null,
 
-      dropdownItem: 1,
       dropdownItems: [
         { text: 'Home', icon: 'mdi-view-dashboard', url: '/home' },
         { text: 'Settings', icon: 'mdi-account', url: '/home/settings/profile' },

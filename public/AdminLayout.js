@@ -149,7 +149,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       menu: false,
       drawer: null,
-      dropdownItem: 1,
       dropdownItems: [{
         text: 'Home',
         icon: 'mdi-view-dashboard',
@@ -354,20 +353,11 @@ var render = function() {
                     "v-list",
                     { attrs: { shaped: "", dense: "" } },
                     [
-                      _c("v-subheader", [_vm._v("REPORTS")]),
+                      _c("v-subheader", [_vm._v("NAVIGATION")]),
                       _vm._v(" "),
                       _c(
                         "v-list-item-group",
-                        {
-                          attrs: { color: "primary" },
-                          model: {
-                            value: _vm.dropdownItem,
-                            callback: function($$v) {
-                              _vm.dropdownItem = $$v
-                            },
-                            expression: "dropdownItem"
-                          }
-                        },
+                        { attrs: { color: "primary" } },
                         _vm._l(_vm.dropdownItems, function(ip, i) {
                           return _c(
                             "v-list-item",
