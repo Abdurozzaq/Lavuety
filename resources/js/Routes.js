@@ -1,36 +1,6 @@
 import multiguard from 'vue-router-multiguard';
 import axios from 'axios';
 
-// Layouts
-import UserLayout from "./layouts/Dashboard-User.vue";
-import AdminLayout from "./layouts/Dashboard-Admin.vue";
-import LandingLayout from "./layouts/Landing.vue";
-
-// For Auth
-import Login from "./pages/auth/Login.vue";
-import Register from "./pages/auth/Register.vue";
-import ForgotPassword from "./pages/auth/ForgotPassword.vue";
-import ResetPassword from "./pages/auth/ResetPassword.vue";
-import ResendVerificationMail from "./pages/auth/ResendVerificationMail.vue";
-import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue";
-// import LandingPage from "./pages/LandingPage.vue";
-import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue";
-
-// Home Pages Routes
-import UserHome from './pages/home/user/UserHome.vue'
-import AdminHome from './pages/home/admin/AdminHome.vue'
-
-// For Settings
-import UserSettings from './pages/profile/user/Settings.vue'
-
-// Settings Children Pages
-import ProfileSettings from './pages/profile/user/childrenPages/ProfileSettings.vue'
-
-// For Error Pages
-import Error404 from './pages/error/404.vue'
-
-import Component from "./components/ExampleComponent.vue"
-
 const token = localStorage.getItem('userToken')
 if (token) {
   axios.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token
@@ -184,11 +154,11 @@ const pageTitle = (to, from, next) => {
 export const routes = [
     {
         path: "",
-        component: LandingLayout,
+        component: () => import(/* webpackChunkName: "LandingLayout" */'./layouts/Landing.vue'),
         children: [
 					{
 						path: "",
-						component: Login,
+						component: () => import(/* webpackChunkName: "LoginPage" */'./pages/auth/Login.vue'),
 						meta: {
 								title: `Welcome - ${app_name}`,
 						},
@@ -196,7 +166,7 @@ export const routes = [
 					},
 					{
 						path: "/register",
-						component: Register,
+						component: () => import(/* webpackChunkName: "RegisterPage" */'./pages/auth/Register.vue'),
 						meta: {
 								title: `Register - ${app_name}`,
 						},
@@ -204,7 +174,7 @@ export const routes = [
 					},
 					{
 						path: "/resend-verification-mail",
-						component: ResendVerificationMail,
+						component: () => import(/* webpackChunkName: "ResendVerificationEmail" */'./pages/auth/ResendVerificationMail.vue'),
 						meta: {
 								title: `Resend Verification Mail - ${app_name}`,
 						},
@@ -212,7 +182,7 @@ export const routes = [
 					},
 					{
 						path: "/forgot-password",
-						component: ForgotPassword,
+						component: () => import(/* webpackChunkName: "ForgotPassword" */'./pages/auth/ForgotPassword.vue'),
 						meta: {
 								title: `Forgot Password - ${app_name}`,
 						},
@@ -220,7 +190,7 @@ export const routes = [
 					},
 					{
 						path: "/reset-password",
-						component: ResetPassword,
+						component: () => import(/* webpackChunkName: "ResetPassword" */'./pages/auth/ResetPassword.vue'),
 						meta: {
 								title: `Reset Password - ${app_name}`,
 						},
@@ -230,11 +200,11 @@ export const routes = [
     },
     {
 			path: "/home",
-			component: UserLayout,
+			component: () => import(/* webpackChunkName: "UserLayout" */'./layouts/Dashboard-User.vue'),
 			children: [
 				{
 					path: "",
-					component: UserHome,
+					component: () => import(/* webpackChunkName: "UserHome" */'./pages/home/user/UserHome.vue'),
 					meta: {
 							title: `User Dashboard - ${app_name}`,
 					},
@@ -242,11 +212,11 @@ export const routes = [
 				},
 				{
 					path: "settings",
-					component: UserSettings,
+					component: () => import(/* webpackChunkName: "UserSettings" */'./pages/profile/user/Settings.vue'),
 					children: [
 						{
 							path: "profile",
-							component: ProfileSettings,
+							component: () => import(/* webpackChunkName: "UserProfileSettings" */'./pages/profile/user/childrenPages/ProfileSettings.vue'),
 							meta: {
 									title: `Profile Settings - ${app_name}`,
 							},
@@ -258,11 +228,11 @@ export const routes = [
     },
     {
         path: "/siAdmino",
-        component: AdminLayout,
+        component: () => import(/* webpackChunkName: "AdminLayout" */'./layouts/Dashboard-Admin.vue'),
         children: [
             {
                 path: "",
-                component: AdminHome,
+                component: () => import(/* webpackChunkName: "AdminHome" */'./pages/home/admin/AdminHome.vue'),
 								meta: {
 										title: `Admin Dashboard - ${app_name}`,
 								},
@@ -277,14 +247,14 @@ export const routes = [
 		// Login, Register, Forgot Password, & Reset Password Routes are the children of Landing Layout
     {
 			path: "/verification-success",
-			component: RedirectAfterVerify,
+			component: () => import(/* webpackChunkName: "VerificationSuccess" */'./pages/auth/RedirectAfterVerify.vue'),
 			meta: {
 					title: `Verification Success - ${app_name}`,
 			},
     },
     {
 			path: "/UnverifiedEmail",
-			component: UnverifiedEmail,
+			component: () => import(/* webpackChunkName: "UnverifiedEmail" */'./pages/auth/UnverifiedEmail.vue'),
 			meta: {
 					title: `Unverified Email Address - ${app_name}`,
 			},
@@ -296,7 +266,7 @@ export const routes = [
 		 */
 		{
 			path: "*",
-			component: Error404,
+			component: () => import(/* webpackChunkName: "Error404Page" */'./pages/error/404.vue'),
 			meta: {
 					title: `404  Not Found - ${app_name}`,
 			},
