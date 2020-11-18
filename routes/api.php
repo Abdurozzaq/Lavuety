@@ -34,3 +34,7 @@ Route::group([
     
 });
 
+Route::middleware(['jwt.verify'])->group(function () {
+  Route::post('settings/profile/avatar-upload', 'Api\Settings\ProfileSettingsController@avatarUpload');
+});
+

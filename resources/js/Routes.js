@@ -1,8 +1,10 @@
 import multiguard from 'vue-router-multiguard';
 import axios from 'axios';
 
+// Layouts
 import UserLayout from "./layouts/Dashboard-User.vue";
 import AdminLayout from "./layouts/Dashboard-Admin.vue";
+import LandingLayout from "./layouts/Landing.vue";
 
 // For Auth
 import Login from "./pages/auth/Login.vue";
@@ -11,9 +13,18 @@ import ForgotPassword from "./pages/auth/ForgotPassword.vue";
 import ResetPassword from "./pages/auth/ResetPassword.vue";
 import ResendVerificationMail from "./pages/auth/ResendVerificationMail.vue";
 import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue";
-import LandingLayout from "./layouts/Landing.vue";
-import LandingPage from "./pages/LandingPage.vue";
+// import LandingPage from "./pages/LandingPage.vue";
 import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue";
+
+// Home Pages Routes
+import UserHome from './pages/home/user/UserHome.vue'
+import AdminHome from './pages/home/admin/AdminHome.vue'
+
+// For Settings
+import UserSettings from './pages/profile/user/Settings.vue'
+
+// Settings Children Pages
+import ProfileSettings from './pages/profile/user/childrenPages/ProfileSettings.vue'
 
 // For Error Pages
 import Error404 from './pages/error/404.vue'
@@ -79,22 +90,22 @@ const ifNotAuthenticated = (to, from, next) => {
  * User Only
  */
 const adminOnly = (to, from, next) => {
-        axios.get('api/auth/me')
-            .then(function (response) {
-                // handle success
-                let userRole = response.data.role
-                if (userRole == "admin") {
-                    next()
-                    return
-                } else {
-                    next('/')
-                    return
-                }
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
+	axios.get('api/auth/me')
+		.then(function (response) {
+			// handle success
+			let userRole = response.data.role
+			if (userRole == "admin") {
+				next()
+				return
+			} else {
+				next('/')
+				return
+			}
+		})
+		.catch(function (error) {
+			// handle error
+			console.log(error);
+		})
 }
 
 const userOnly = (to, from, next) => {
@@ -218,18 +229,32 @@ export const routes = [
         ]
     },
     {
-        path: "/home",
-        component: UserLayout,
-        children: [
-            {
-                path: "",
-                component: Component,
-								meta: {
-										title: `Admin Dashboard - ${app_name}`,
-								},
-                beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
-            }
-        ]
+			path: "/home",
+			component: UserLayout,
+			children: [
+				{
+					path: "",
+					component: UserHome,
+					meta: {
+							title: `User Dashboard - ${app_name}`,
+					},
+					beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
+				},
+				{
+					path: "settings",
+					component: UserSettings,
+					children: [
+						{
+							path: "profile",
+							component: ProfileSettings,
+							meta: {
+									title: `Profile Settings - ${app_name}`,
+							},
+							beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
+						},
+					]
+				}
+			]
     },
     {
         path: "/siAdmino",
@@ -237,7 +262,7 @@ export const routes = [
         children: [
             {
                 path: "",
-                component: Component,
+                component: AdminHome,
 								meta: {
 										title: `Admin Dashboard - ${app_name}`,
 								},

@@ -10,6 +10,9 @@ import VueAxios from 'vue-axios'
 // For Router
 import VueRouter from 'vue-router';
 import { routes } from './Routes';
+// For Image Cropper
+import InstagramCropper from 'vue-instagram-cropper'
+ 
 
 // For AXIOS DEFAULT HEADERS
 // axios.defaults.withCredentials = true
@@ -29,8 +32,8 @@ const router = new VueRouter({
     mode: 'history',
     routes
 });
- 
 Vue.use(VueAxios, axios)
+Vue.component('instagram-cropper', InstagramCropper)
 
 const app = new Vue({
     vuetify,
