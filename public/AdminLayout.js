@@ -158,7 +158,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Settings',
         icon: 'mdi-account',
-        url: '/settings'
+        url: '/siAdmino/settings/profile'
       }],
       sidebarItems: [{
         title: 'Home',

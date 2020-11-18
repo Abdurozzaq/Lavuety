@@ -141,7 +141,7 @@
       dropdownItem: 1,
       dropdownItems: [
         { text: 'Home', icon: 'mdi-view-dashboard', url: '/home' },
-        { text: 'Settings', icon: 'mdi-account', url: '/settings' },
+        { text: 'Settings', icon: 'mdi-account', url: '/home/settings/profile' },
       ],
 
 			sidebarItems: [

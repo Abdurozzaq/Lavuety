@@ -63,9 +63,9 @@ export default {
 	data() {
 		return {
       listItem: [
-        { text: 'Profile', icon: 'mdi-account', url: '/home/settings/profile' },
-				{ text: 'Email', icon: 'mdi-email', url: '/home/settings/email' },
-        { text: 'Password', icon: 'mdi-form-textbox-password', url: '/home/settings/password' },
+        { text: 'Profile', icon: 'mdi-account', url: '/siAdmino/settings/profile' },
+				{ text: 'Email', icon: 'mdi-email', url: '/siAdmino/settings/email' },
+        { text: 'Password', icon: 'mdi-form-textbox-password', url: '/siAdmino/settings/password' },
       ],
 			first_name: "",
 			last_name: "",

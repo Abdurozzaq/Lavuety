@@ -141,7 +141,7 @@
       dropdownItem: 1,
       dropdownItems: [
         { text: 'Home', icon: 'mdi-view-dashboard', url: '/siAdmino' },
-        { text: 'Settings', icon: 'mdi-account', url: '/settings' },
+        { text: 'Settings', icon: 'mdi-account', url: '/siAdmino/settings/profile' },
       ],
 
 			sidebarItems: [

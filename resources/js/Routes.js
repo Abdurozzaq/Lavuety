@@ -230,14 +230,28 @@ export const routes = [
         path: "/siAdmino",
         component: () => import(/* webpackChunkName: "AdminLayout" */'./layouts/Dashboard-Admin.vue'),
         children: [
-            {
-                path: "",
-                component: () => import(/* webpackChunkName: "AdminHome" */'./pages/home/admin/AdminHome.vue'),
+					{
+						path: "",
+						component: () => import(/* webpackChunkName: "AdminHome" */'./pages/home/admin/AdminHome.vue'),
+						meta: {
+								title: `Admin Dashboard - ${app_name}`,
+						},
+						beforeEnter: multiguard([pageTitle, ifAuthenticated, adminOnly, verifiedEmail]),
+					},
+					{
+						path: "settings",
+						component: () => import(/* webpackChunkName: "AdminSettings" */'./pages/profile/admin/Settings.vue'),
+						children: [
+							{
+								path: "profile",
+								component: () => import(/* webpackChunkName: "AdminProfileSettings" */'./pages/profile/admin/childrenPages/ProfileSettings.vue'),
 								meta: {
-										title: `Admin Dashboard - ${app_name}`,
+										title: `Profile Settings - ${app_name}`,
 								},
-                beforeEnter: multiguard([pageTitle, ifAuthenticated, adminOnly, verifiedEmail]),
-            },
+								beforeEnter: multiguard([pageTitle, ifAuthenticated, adminOnly, verifiedEmail]),
+							},
+						]
+					}
         ]
     },
 
