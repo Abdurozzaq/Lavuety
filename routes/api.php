@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Auth Group
 Route::group([
 
     'middleware' => 'api',
@@ -34,7 +36,26 @@ Route::group([
     
 });
 
+// Universal Role Group
 Route::middleware(['jwt.verify'])->group(function () {
+
   Route::post('settings/profile/avatar-upload', 'Api\Settings\ProfileSettingsController@avatarUpload');
+
 });
+
+// Per Role Group
+Route::middleware(['jwt.verify'])->group(function () {
+
+	// Admin Routes
+  Route::group(['middleware' => ['role:admin']], function () {
+    Route::post('settings/profile/admin/profile-details-update', 'Api\Settings\ProfileSettingsController@adminProfileDetailsUpdate');
+	});
+
+	// User Routes
+  Route::group(['middleware' => ['role:user']], function () {
+    Route::post('settings/profile/user/profile-details-update', 'Api\Settings\ProfileSettingsController@userProfileDetailsUpdate');
+	});
+
+});
+
 

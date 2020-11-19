@@ -28,4 +28,38 @@ class ProfileSettingsController extends Controller
 			'message' => 'Your Avatar has changed!'
 		], 200);
 	}
+
+	public function userProfileDetailsUpdate(Request $request){
+		$this->validate($request, [
+			'first_name' => 'required',
+			'last_name' => 'required'
+		]);
+ 
+		$user = Auth::user();
+		$user->first_name = $request->first_name;
+		$user->last_name = $request->last_name;
+		$user->save();
+
+		return response()->json([
+			'status' => 'success',
+			'message' => 'Your profile details has been updated!'
+		], 200);
+	}
+
+	public function adminProfileDetailsUpdate(Request $request){
+		$this->validate($request, [
+			'first_name' => 'required',
+			'last_name' => 'required'
+		]);
+ 
+		$user = Auth::user();
+		$user->first_name = $request->first_name;
+		$user->last_name = $request->last_name;
+		$user->save();
+
+		return response()->json([
+			'status' => 'success',
+			'message' => 'Your profile details has been updated!'
+		], 200);
+	}
 }

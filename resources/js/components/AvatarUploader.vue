@@ -38,7 +38,7 @@
 			vertical
 		>
 			{{ snackbarText }}
-			<template v-slot:action="{ attrs }">
+			<template v-slot:action="{}">
         <v-btn
 					color="white"
 					text
