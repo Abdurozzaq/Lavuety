@@ -95,7 +95,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     // end of getMe()
     submit: function submit() {
-      var currentObj = this;
+      var currentObj = this; // clear error
+
+      currentObj.serverError = "";
       var data = {
         first_name: currentObj.first_name,
         last_name: currentObj.last_name

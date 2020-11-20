@@ -222,6 +222,14 @@ export const routes = [
 							},
 							beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
 						},
+						{
+								path: "email",
+								component: () => import(/* webpackChunkName: "UserEmailSettings" */'./pages/profile/user/childrenPages/EmailSettings.vue'),
+								meta: {
+										title: `Email Settings - ${app_name}`,
+								},
+								beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
+							},
 					]
 				}
 			]
@@ -247,6 +255,14 @@ export const routes = [
 								component: () => import(/* webpackChunkName: "AdminProfileSettings" */'./pages/profile/admin/childrenPages/ProfileSettings.vue'),
 								meta: {
 										title: `Profile Settings - ${app_name}`,
+								},
+								beforeEnter: multiguard([pageTitle, ifAuthenticated, adminOnly, verifiedEmail]),
+							},
+							{
+								path: "email",
+								component: () => import(/* webpackChunkName: "AdminEmailSettings" */'./pages/profile/admin/childrenPages/EmailSettings.vue'),
+								meta: {
+										title: `Email Settings - ${app_name}`,
 								},
 								beforeEnter: multiguard([pageTitle, ifAuthenticated, adminOnly, verifiedEmail]),
 							},

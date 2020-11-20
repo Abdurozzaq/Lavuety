@@ -62,4 +62,21 @@ class ProfileSettingsController extends Controller
 			'message' => 'Your profile details has been updated!'
 		], 200);
 	}
+
+	public function allEmailUpdate(Request $request){
+		$this->validate($request, [
+			'email' => 'required|email|unique:users',
+		]);
+ 
+		$user = Auth::user();
+		$user->email = $request->email;
+		$date = date("Y-m-d g:i:s");
+    $user->email_verified_at = $date;
+		$user->save();
+
+		return response()->json([
+			'status' => 'success',
+			'message' => 'Your email has been changed!'
+		], 200);
+	}
 }

@@ -8,15 +8,7 @@
 				placeholder="Enter Your First Name Here..."
 				filled
 				type="text"
-				v-model="first_name"
-			></v-text-field>
-
-			<v-text-field
-				label="Last Name"
-				placeholder="Enter Your Last Name Here..."
-				filled
-				type="text"
-				v-model="last_name"
+				v-model="email"
 			></v-text-field>
 
 			<v-btn
@@ -58,8 +50,7 @@ export default {
 
 	data() {
 		return {
-			first_name: "",
-			last_name: "",
+			email: "",
 			serverError: "",
 			snackbar: false,
 			snackbarColor: "",
@@ -76,8 +67,7 @@ export default {
 			axios.get('api/auth/me')
 			.then(function (response) {
 				// handle success
-				currentObj.first_name = response.data.user.first_name
-				currentObj.last_name = response.data.user.last_name
+				currentObj.email = response.data.user.email
 			})
 			.catch(function (error) {
 				// handle error
@@ -92,16 +82,15 @@ export default {
 			currentObj.serverError = ""
 
 			var data = {
-				first_name: currentObj.first_name,
-				last_name: currentObj.last_name
+				email: currentObj.email,
 			}
 
-			axios.post('api/settings/profile/user/profile-details-update', data)
+			axios.post('api/settings/profile/email-update', data)
 			.then(function (response) {
 				// handle success
 				currentObj.snackbar = true
 				currentObj.snackbarColor = 'success'
-				currentObj.snackbarText = "Your profile details has been successfully updated. Please reload the page to see the changes..."
+				currentObj.snackbarText = "Your Email has been successfully changed. Please reload the page to see the changes..."
 			})
 			.catch(function (error) {
 				// handle error

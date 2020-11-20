@@ -88,6 +88,9 @@ export default {
 		submit: function() {
 			let currentObj = this
 
+			// clear error
+			currentObj.serverError = ""
+
 			var data = {
 				first_name: currentObj.first_name,
 				last_name: currentObj.last_name
