@@ -12,6 +12,11 @@ Laravel & Vuetify Starter Kit (or some thing like boilerplate)
 
 User & Admin
 
+**Features**
+1. Authentication (Login, Register, Forgot Password, Email Verification, Resend Verification Mail)
+2. Profile Settings (Profile Details Update, Email Update, Password Update)
+3. Avatar (With Crop Tool - Third Party Package)
+
 # Installation
 
 Create a Database Table in phpMyAdmin
@@ -52,8 +57,7 @@ Then open the browser, and enter the url:
   ```http://localhost:8000```
   
 or if you want to run on another port, use the command:
-  ```$ php artisan serve --port: 627 // e.g. the port is "627"```
-  ``` and change the port on APP_URL variable in .env file```
+  ```$ php artisan serve --port: 627 // e.g. the port is "627" and change the port on APP_URL variable in .env file```
 
 And for serving the vue JS run this command:
 For Development : ```npm run watch```
@@ -65,5 +69,4 @@ Thank you, Good Luck ... 😁
 
 # The Accounts on seeder:
 Admin Account - Emaill: admin@gmail.com, Password: password
-
 User Account - Email: user@gmail.com, Password: password
