@@ -223,13 +223,21 @@ export const routes = [
 							beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
 						},
 						{
-								path: "email",
-								component: () => import(/* webpackChunkName: "UserEmailSettings" */'./pages/profile/user/childrenPages/EmailSettings.vue'),
-								meta: {
-										title: `Email Settings - ${app_name}`,
-								},
-								beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
+							path: "email",
+							component: () => import(/* webpackChunkName: "UserEmailSettings" */'./pages/profile/user/childrenPages/EmailSettings.vue'),
+							meta: {
+									title: `Email Settings - ${app_name}`,
 							},
+							beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
+						},
+						{
+							path: "password",
+							component: () => import(/* webpackChunkName: "UserPasswordSettings" */'./pages/profile/user/childrenPages/PasswordSettings.vue'),
+							meta: {
+									title: `Password Settings - ${app_name}`,
+							},
+							beforeEnter: multiguard([pageTitle, ifAuthenticated, userOnly, verifiedEmail]),
+						},
 					]
 				}
 			]
@@ -263,6 +271,14 @@ export const routes = [
 								component: () => import(/* webpackChunkName: "AdminEmailSettings" */'./pages/profile/admin/childrenPages/EmailSettings.vue'),
 								meta: {
 										title: `Email Settings - ${app_name}`,
+								},
+								beforeEnter: multiguard([pageTitle, ifAuthenticated, adminOnly, verifiedEmail]),
+							},
+							{
+								path: "password",
+								component: () => import(/* webpackChunkName: "AdminPasswordSettings" */'./pages/profile/admin/childrenPages/PasswordSettings.vue'),
+								meta: {
+										title: `Password Settings - ${app_name}`,
 								},
 								beforeEnter: multiguard([pageTitle, ifAuthenticated, adminOnly, verifiedEmail]),
 							},

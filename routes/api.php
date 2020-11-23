@@ -41,6 +41,7 @@ Route::middleware(['jwt.verify'])->group(function () {
 
   Route::post('settings/profile/avatar-upload', 'Api\Settings\ProfileSettingsController@avatarUpload');
 	Route::post('settings/profile/email-update', 'Api\Settings\ProfileSettingsController@allEmailUpdate');
+	Route::post('settings/profile/password-update', 'Api\Settings\ProfileSettingsController@allPasswordUpdate');
 });
 
 // Per Role Group

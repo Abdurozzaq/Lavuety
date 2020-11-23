@@ -4,11 +4,19 @@
 
 		<v-form @submit.prevent="submit">
 			<v-text-field
-				label="Email"
-				placeholder="Enter Your New Email Here..."
+				label="New Password"
+				placeholder="Enter Your New Password Here..."
 				filled
-				type="text"
-				v-model="email"
+				type="password"
+				v-model="password"
+			></v-text-field>
+
+			<v-text-field
+				label="Confirm New Password"
+				placeholder="Confirm Your New Password Here..."
+				filled
+				type="password"
+				v-model="password_confirmation"
 			></v-text-field>
 
 			<v-btn
@@ -50,7 +58,8 @@ export default {
 
 	data() {
 		return {
-			email: "",
+			password: "",
+			password_confirmation: "",
 			serverError: "",
 			snackbar: false,
 			snackbarColor: "",
@@ -59,22 +68,6 @@ export default {
 	}, // end of data()
 
 	methods: {
-		getMe: function() {
-			let currentObj = this
-
-			currentObj.serverError = ""
-
-			axios.get('api/auth/me')
-			.then(function (response) {
-				// handle success
-				currentObj.email = response.data.user.email
-			})
-			.catch(function (error) {
-				// handle error
-				console.log(error);
-			})
-		}, // end of getMe()
-
 		submit: function() {
 			let currentObj = this
 
@@ -82,15 +75,16 @@ export default {
 			currentObj.serverError = ""
 
 			var data = {
-				email: currentObj.email,
+				password: currentObj.password,
+				password_confirmation: currentObj.password_confirmation
 			}
 
-			axios.post('api/settings/profile/email-update', data)
+			axios.post('api/settings/profile/password-update', data)
 			.then(function (response) {
 				// handle success
 				currentObj.snackbar = true
 				currentObj.snackbarColor = 'success'
-				currentObj.snackbarText = "Your Email has been successfully changed. Please reload the page to see the changes..."
+				currentObj.snackbarText = "Your Password has been successfully changed. Just sign back in to see the changes ..."
 			})
 			.catch(function (error) {
 				// handle error
@@ -100,12 +94,6 @@ export default {
 			})
 		}
 	}, // end of methods 
-
-	mounted: function() {
-		let currentObj = this
-
-		currentObj.getMe()
-	}
 }
 </script>
 

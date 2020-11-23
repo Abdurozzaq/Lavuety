@@ -215,8 +215,8 @@ var render = function() {
         [
           _c("v-text-field", {
             attrs: {
-              label: "First Name",
-              placeholder: "Enter Your First Name Here...",
+              label: "Email",
+              placeholder: "Enter Your New Email Here...",
               filled: "",
               type: "text"
             },

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileSettingsController extends Controller
 {
@@ -79,4 +80,22 @@ class ProfileSettingsController extends Controller
 			'message' => 'Your email has been changed!'
 		], 200);
 	}
+
+	public function allPasswordUpdate(Request $request) {
+
+        $this->validate($request, [
+            'password' => 'required|confirmed|min:8',
+            'password_confirmation' => 'required|min:8',
+        ]);
+
+        $user = User::findOrFail(Auth::user()->id);
+        $user->password = Hash::make($request['password']);
+        $user->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Password Changed Successfully',
+        ], 200);
+        
+    }
 }
