@@ -69,4 +69,5 @@ Thank you, Good Luck ... 😁
 
 # The Accounts on seeder:
 Admin Account - Emaill: admin@gmail.com, Password: password
+
 User Account - Email: user@gmail.com, Password: password
