@@ -1,4 +1,4 @@
-### UNDER DEVELOPMENT, Sorry!
+### Status? Its Ready!
 
 ## Abdurozzaq Nurul Hadi (Abdurozzaq@outlook.com) (IG: @ozzaqnh)
 
